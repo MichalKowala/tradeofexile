@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using tradeofexile.Models;
+using tradeofexile.models;
 
 namespace tradeofexile.Controllers
 {

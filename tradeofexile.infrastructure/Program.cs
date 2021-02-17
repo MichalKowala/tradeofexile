@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 
 namespace tradeofexile.infrastructure
 {
@@ -6,7 +7,12 @@ namespace tradeofexile.infrastructure
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ApiHelper.InitializeClient();
+
+            string jsonString = ApiHelper.GetResponseFromPoeApi();
+            JObject jsonObject = JObject.Parse(jsonString);
+
+            Console.WriteLine("tesT");
         }
     }
 }

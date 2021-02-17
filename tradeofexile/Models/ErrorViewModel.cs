@@ -1,6 +1,6 @@
 using System;
 
-namespace tradeofexile.Models
+namespace tradeofexile.models
 {
     public class ErrorViewModel
     {
