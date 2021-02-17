@@ -7,6 +7,8 @@ namespace tradeofexile.models
 {
     public class Item
     {
+        [JsonProperty("name")]
+        public string Name;
         [JsonProperty("verified")]
         public bool IsVerified;
         [JsonProperty("w")]
