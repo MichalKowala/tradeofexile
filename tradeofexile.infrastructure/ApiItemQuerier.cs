@@ -9,17 +9,14 @@ namespace tradeofexile.infrastructure
     {
 
         private static readonly string baseUrl = "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=name";
-        public static string GetItemAndRarityParametriziedGamepediaCallUrl(ItemClass itemClass, ItemRarity itemRarity)
+        public static string GetItemAndRarityParametriziedGamepediaCallUrl(ItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
         {
             string parametriziedUrl = ApplyWhereClauseToUrl(baseUrl);
             parametriziedUrl = ApplyClassParameterToUrl(itemClass, parametriziedUrl);
             parametriziedUrl = ApplyAndClauseToUrl(parametriziedUrl);
             parametriziedUrl = ApplyRarityParameterToUrl(itemRarity, parametriziedUrl);
+            parametriziedUrl = ApplyFormatParameterToUrl(responseFormat, parametriziedUrl);
             return parametriziedUrl;
-        }
-        private static string ApplyClassParameterToUrl(ItemClass itemClass, string url)
-        {
-            return $"{url}class=%22{itemClassToUrlClassParameterDictionary[itemClass]}%22";
         }
         private static string ApplyWhereClauseToUrl(string url)
         {
@@ -29,9 +26,17 @@ namespace tradeofexile.infrastructure
         {
             return $"{url} AND ";
         }
+        private static string ApplyClassParameterToUrl(ItemClass itemClass, string url)
+        {
+            return $"{url}class=%22{itemClassToUrlClassParameterDictionary[itemClass]}%22";
+        }
         private static string ApplyRarityParameterToUrl(ItemRarity itemRarity, string url)
         {
             return $"{url}rarity=%22{itemRarityToUrlRarityParameterDictionary[itemRarity].ToString()}%22";
+        }
+        private static string ApplyFormatParameterToUrl(ResponseFormat format, string url)
+        {
+            return $"{url}&format={format}";
         }
         private static readonly Dictionary<ItemClass, string> itemClassToUrlClassParameterDictionary = new Dictionary<ItemClass, string>()
         {
