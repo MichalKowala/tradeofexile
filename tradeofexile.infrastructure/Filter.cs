@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using tradeofexile.models;
+using tradeofexile.models.Items;
 
 namespace tradeofexile.infrastructure
 {
@@ -15,21 +16,21 @@ namespace tradeofexile.infrastructure
             stashes = RemoveEmptyStashes(stashes);
             return stashes;
         }
-        public static List<Stash> RemoveEmptyStashes (List<Stash> stashes)
+        public static List<Stash> RemoveEmptyStashes(List<Stash> stashes)
         {
             stashes.RemoveAll(x => x.Items.Count == 0 || x.AccountName == null);
             return stashes;
         }
-        public static List<Stash> RemoveStandardLeagueStashes (List<Stash> stashes)
+        public static List<Stash> RemoveStandardLeagueStashes(List<Stash> stashes)
         {
-            stashes.RemoveAll(x => x.League == "Standard");
+            stashes.RemoveAll(x => x.League == LeagueType.Standard);
             return stashes;
         }
-        public static List<Stash> RemoveItemsWithNoPrice (List<Stash> stashes)
+        public static List<Stash> RemoveItemsWithNoPrice(List<Stash> stashes)
         {
-            foreach(Stash s in stashes)
+            foreach (Stash s in stashes)
             {
-                s.Items.RemoveAll(x => x.Price == null);
+                s.Items.RemoveAll(x => x.Price.Ammount==0);
             }
             return stashes;
         }

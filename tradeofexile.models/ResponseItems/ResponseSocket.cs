@@ -2,7 +2,7 @@
 
 namespace tradeofexile.models
 {
-    public class Socket
+    public class ResponseSocket
     {
         [JsonProperty("group")]
         public string Group;

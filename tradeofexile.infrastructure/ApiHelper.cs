@@ -15,9 +15,9 @@ namespace tradeofexile.infrastructure
             ApiClient.DefaultRequestHeaders.Accept.Clear();
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public static string GetResponseFromPoeApi()
+        public static string GetResponseFromApi(string url = "http://api.pathofexile.com/public-stash-tabs/")
         {
-            string url = "http://api.pathofexile.com/public-stash-tabs";
+            InitializeClient();
             HttpResponseMessage response = ApiHelper.ApiClient.GetAsync(url).Result;
             var responsejson = response.Content.ReadAsStringAsync();
             return responsejson.Result;

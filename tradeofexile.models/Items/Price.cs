@@ -4,8 +4,9 @@ using System.Text;
 
 namespace tradeofexile.models.Items
 {
-    public class Extended
+    public struct Price
     {
-        public ItemCategory Category=ItemCategory.Unspecified;
+       public double Ammount;
+       public CurrencyType CurrencyType;
     }
 }

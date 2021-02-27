@@ -4,8 +4,11 @@ using System.Text;
 
 namespace tradeofexile.models.Items
 {
-    public class Extended
+    public enum LeagueType
     {
-        public ItemCategory Category=ItemCategory.Unspecified;
+        Ritual,
+        HardcoreRitual,
+        Standard,
+        Other
     }
 }

@@ -10,6 +10,6 @@ namespace tradeofexile.models
         [JsonProperty("next_change_id")]
         public string Next_Change_Id;
         [JsonProperty("stashes")]
-        public List<Stash> Stashes;
+        public List<ResponseStash> Stashes;
     }
 }

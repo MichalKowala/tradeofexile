@@ -9,7 +9,7 @@ namespace tradeofexile.infrastructure
     {
 
         private static readonly string baseUrl = "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=name";
-        public static string GetItemAndRarityParametriziedGamepediaCallUrl(ItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
+        public static string GetItemAndRarityParametriziedGamepediaCallUrl(GamepediaItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
         {
             string parametriziedUrl = ApplyWhereClauseToUrl(baseUrl);
             parametriziedUrl = ApplyClassParameterToUrl(itemClass, parametriziedUrl);
@@ -18,6 +18,7 @@ namespace tradeofexile.infrastructure
             parametriziedUrl = ApplyFormatParameterToUrl(responseFormat, parametriziedUrl);
             return parametriziedUrl;
         }
+        
         private static string ApplyWhereClauseToUrl(string url)
         {
             return $"{url}&where=";
@@ -26,9 +27,9 @@ namespace tradeofexile.infrastructure
         {
             return $"{url} AND ";
         }
-        private static string ApplyClassParameterToUrl(ItemClass itemClass, string url)
+        private static string ApplyClassParameterToUrl(GamepediaItemClass itemClass, string url)
         {
-            return $"{url}class=%22{itemClassToUrlClassParameterDictionary[itemClass]}%22";
+            return $"{url}class=%22{gamepediaItemClassToUrlParameter[itemClass]}%22";
         }
         private static string ApplyRarityParameterToUrl(ItemRarity itemRarity, string url)
         {
@@ -38,25 +39,25 @@ namespace tradeofexile.infrastructure
         {
             return $"{url}&format={format}";
         }
-        private static readonly Dictionary<ItemClass, string> itemClassToUrlClassParameterDictionary = new Dictionary<ItemClass, string>()
+        private static readonly Dictionary<GamepediaItemClass, string> gamepediaItemClassToUrlParameter = new Dictionary<GamepediaItemClass, string>()
         {
-            { ItemClass.Daggers,"Daggers" },
-            { ItemClass.Claws,"Claws"},
-            { ItemClass.OneHandSwords,"One Hand Swords" },
-            { ItemClass.ThrustingOneHandSwords,"Thrusting One Hand Swords" },
-            { ItemClass.OneHandAxes, "One Hand Axes" },
-            { ItemClass.Bows,"Bows"},
-            { ItemClass.Wands,"Wands" },
-            { ItemClass.Staves,"Staves" },
-            { ItemClass.TwoHandAxes,"Two Hand Axes" },
-            { ItemClass.TwoHandMaces,"Two Hand Maces" },
-            { ItemClass.Sceptres,"Sceptres" },
-            { ItemClass.LifeFlasks,"Life Flasks" },
-            { ItemClass.ManaFlasks,"Mana Flasks" },
-            { ItemClass.HybridFlasks,"Hybrid Flasks" },
-            { ItemClass.UtilityFlasks,"Utility Flasks" },
-            { ItemClass.CriticalUtilityFlasks,"Critical Utility Flasks" },
-            { ItemClass.Jewels,"Jewel" }
+            { GamepediaItemClass.Daggers,"Daggers" },
+            { GamepediaItemClass.Claws,"Claws"},
+            { GamepediaItemClass.OneHandSwords,"One Hand Swords" },
+            { GamepediaItemClass.ThrustingOneHandSwords,"Thrusting One Hand Swords" },
+            { GamepediaItemClass.OneHandAxes, "One Hand Axes" },
+            { GamepediaItemClass.Bows,"Bows"},
+            { GamepediaItemClass.Wands,"Wands" },
+            { GamepediaItemClass.Staves,"Staves" },
+            { GamepediaItemClass.TwoHandAxes,"Two Hand Axes" },
+            { GamepediaItemClass.TwoHandMaces,"Two Hand Maces" },
+            { GamepediaItemClass.Sceptres,"Sceptres" },
+            { GamepediaItemClass.LifeFlasks,"Life Flasks" },
+            { GamepediaItemClass.ManaFlasks,"Mana Flasks" },
+            { GamepediaItemClass.HybridFlasks,"Hybrid Flasks" },
+            { GamepediaItemClass.UtilityFlasks,"Utility Flasks" },
+            { GamepediaItemClass.CriticalUtilityFlasks,"Critical Utility Flasks" },
+            { GamepediaItemClass.Jewels,"Jewel" }
 
         };
         private static Dictionary<ItemRarity, string> itemRarityToUrlRarityParameterDictionary = new Dictionary<ItemRarity, string>()

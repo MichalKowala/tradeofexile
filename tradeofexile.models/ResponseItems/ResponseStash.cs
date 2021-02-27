@@ -5,7 +5,7 @@ using System.Text;
 
 namespace tradeofexile.models
 {
-    public class Stash
+    public class ResponseStash
     {
         [JsonProperty("id")]
         public string Id;
@@ -22,7 +22,7 @@ namespace tradeofexile.models
         [JsonProperty("league")]
         public string League;
         [JsonProperty("items")]
-        public List<Item> Items;
+        public List<ResponseItem> Items;
 
     }
 }

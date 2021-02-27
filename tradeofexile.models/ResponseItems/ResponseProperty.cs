@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace tradeofexile.models
 {
-    public class Property
+    public class ResponseProperty
     {
         [JsonProperty("name")]
         public string Name;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace tradeofexile.models.Enums
 {
-    public enum ItemClass
+    public enum GamepediaItemClass
     {
         Daggers,
         Claws,
@@ -22,7 +22,8 @@ namespace tradeofexile.models.Enums
         HybridFlasks,
         UtilityFlasks,
         CriticalUtilityFlasks,
-        Jewels
+        Jewels,
+        Currency
         
     }
 }
