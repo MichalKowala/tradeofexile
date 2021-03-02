@@ -7,5 +7,6 @@ namespace tradeofexile.models.Items
     public class Extended
     {
         public ItemCategory Category=ItemCategory.Unspecified;
+        public string BaseType;
     }
 }

@@ -28,6 +28,7 @@ namespace tradeofexile.infrastructure
             item.Name = responseItem.Name;
             item.League = ParseStringLeagueToObjectLeague(responseItem.League);
             item.Id = responseItem.Id;
+            item.Extended.BaseType = responseItem.Extended.BaseType;
             item.Extended.Category = ParseStringCategoryToObjectCategory(responseItem.Extended.Category);
             item.IconLink = responseItem.IconLink;
             if (responseItem.Price != null)
@@ -82,19 +83,28 @@ namespace tradeofexile.infrastructure
             {"heistmission",ItemCategory.HeistMissions},
             {"currency",ItemCategory.Currency },
             {"cards", ItemCategory.Cards },
+
         };
-        private static readonly Dictionary<string, CurrencyType> stringToEnumCurrency = new Dictionary<string, CurrencyType>()
+        public static readonly Dictionary<string, CurrencyType> stringToEnumCurrency = new Dictionary<string, CurrencyType>()
         {
+            {"alt",CurrencyType.AlterationOrb },
+            {"Ancient Orb", CurrencyType.AncientOrb },
+            { "Chaos Orb",CurrencyType.ChaosOrb},
             {"chaos",CurrencyType.ChaosOrb },
+            {"Divine Orb",CurrencyType.DivineOrb },
+            {"divine",CurrencyType.DivineOrb },
+            {"Exalted Orb",CurrencyType.ExaltedOrb },
             {"exalted",CurrencyType.ExaltedOrb },
             {"exa",CurrencyType.ExaltedOrb },
+            {"Orb of Alchemy",CurrencyType.AlchemyOrb },
             {"alch",CurrencyType.AlchemyOrb},
             {"jewellers",CurrencyType.JewellersOrb },
             {"gcp",CurrencyType.GemcuttersPrism },
             {"chisel",CurrencyType.Chisel },
-            {"alt",CurrencyType.AlterationOrb },
+            {"Orb of Fusing",CurrencyType.FusingOrb },
+            {"Orb of Augmentation",CurrencyType.OrbOfAugmentation },
+            {"Vaal Orb",CurrencyType.VaalOrb },
             {"fusing",CurrencyType.FusingOrb },
-            {"divine",CurrencyType.DivineOrb },
             {"mirror",CurrencyType.Mirror }
         };
         private static readonly Dictionary<string, LeagueType> stringToEnumLeague = new Dictionary<string, LeagueType>()

@@ -11,5 +11,7 @@ namespace tradeofexile.models
         public string Category;
         [JsonProperty("subcategories")]
         public List<string> Subcategories;
+        [JsonProperty("baseType")]
+        public string BaseType;
     }
 }

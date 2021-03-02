@@ -6,16 +6,20 @@ namespace tradeofexile.models.Items
 {
     public enum CurrencyType
     {
-        ChaosOrb,
-        ExaltedOrb,
         AlchemyOrb,
-        JewellersOrb,
-        DivineOrb,
-        FusingOrb,
         AlterationOrb,
+        OrbOfAugmentation,
+        AncientOrb,
+        ChaosOrb,
+        DivineOrb,
+        ExaltedOrb,
+        FusingOrb,
+        JewellersOrb,
         GemcuttersPrism,
         Chisel,
         Mirror,
+        VaalOrb,
+        OrbOfScouring,
         Unspecified
     }
 }

@@ -8,5 +8,10 @@ namespace tradeofexile.models.Items
     {
        public double Ammount;
        public CurrencyType CurrencyType;
+        public Price(double ammount, CurrencyType currencyType)
+        {
+            Ammount = ammount;
+            CurrencyType = currencyType;
+        }
     }
 }
