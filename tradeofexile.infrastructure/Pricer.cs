@@ -24,7 +24,6 @@ namespace tradeofexile.infrastructure
                     ExchangeTable.Add(currencyType, new List<Price>() { item.Price });
                 }
             }
-
         }
         public static Price GetRate(CurrencyType pay, CurrencyType get)
         {
@@ -53,6 +52,20 @@ namespace tradeofexile.infrastructure
             else return new Price(1, pay);
         }
 
+        public static void AddPricedItemToDictionary(Item item)
+        {
+            if (ItemsWithOffers.Keys.Where(x => x.Name == item.Name).Any())
+            {
+                Item i = ItemsWithOffers.Keys.Where(x => x.Name == item.Name).First();
+                ItemsWithOffers[i].Add(item.Price);
+            }
+            else
+            {
+                ItemsWithOffers.Add(item, new List<Price>() { item.Price });
+            }
+        }
+
         public static Dictionary<CurrencyType, List<Price>> ExchangeTable = new Dictionary<CurrencyType, List<Price>>();
+        public static Dictionary<Item, List<Price>> ItemsWithOffers = new Dictionary<Item, List<Price>>();
     }
 }

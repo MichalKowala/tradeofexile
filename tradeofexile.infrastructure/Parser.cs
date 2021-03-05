@@ -14,7 +14,6 @@ namespace tradeofexile.infrastructure
         public static Stash ParseResponseStashIntoObjectStash(ResponseStash responseStash)
         {
             Stash stash = new Stash();
-            stash.Id = responseStash.Id;
             stash.IsPublic = responseStash.IsPublic;
             stash.AccountName = responseStash.AccountName;
             stash.League = ParseStringLeagueToObjectLeague(responseStash.League);
@@ -27,7 +26,7 @@ namespace tradeofexile.infrastructure
             Item item = new Item();
             item.Name = responseItem.Name;
             item.League = ParseStringLeagueToObjectLeague(responseItem.League);
-            item.Id = responseItem.Id;
+            item.Extended = new Extended();
             item.Extended.BaseType = responseItem.Extended.BaseType;
             item.Extended.Category = ParseStringCategoryToObjectCategory(responseItem.Extended.Category);
             item.IconLink = responseItem.IconLink;
@@ -51,14 +50,16 @@ namespace tradeofexile.infrastructure
         public static Price ParseStringPriceToObjectPrice(string stringPrice)
         {
             string[] words = stringPrice.Split(' ');
-            Price price = new Price();
+            Price price = new Price(new double(),CurrencyType.Unspecified);
             for (int i = 0; i < words.Count(); i++)
             {
                 if (stringToEnumCurrency.ContainsKey(words[i]))
                 {
                     price.CurrencyType = stringToEnumCurrency[words[i]];
                     words[i - 1].Replace('.', ',');
-                    double.TryParse(words[i - 1], out price.Ammount);
+                    double ammount;
+                    double.TryParse(words[i - 1], out ammount);
+                    price.Ammount = ammount;
                     break;
                 }
                 else
