@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using tradeofexile.models.EntityItems;
 
-namespace tradeofexile.Infrastructure.EntitiesConfiguration
+namespace tradeofexile.persistance.EntitiesConfiguration
 {
     public abstract class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : BaseEntity

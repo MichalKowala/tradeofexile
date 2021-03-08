@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using tradeofexile.Infrastructure.EntitiesConfiguration;
 using tradeofexile.models.Items;
 
-namespace tradeofexile.infrastructure.EntitiesConfiguration
+namespace tradeofexile.persistance.EntitiesConfiguration
 {
     public class PriceEntityConfiguration : BaseEntityConfiguration<Price>
     {

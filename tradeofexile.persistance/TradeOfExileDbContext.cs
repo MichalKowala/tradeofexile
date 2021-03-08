@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using tradeofexile.models.Items;
 
-namespace tradeofexile.infrastructure.Context
-{
+namespace tradeofexile.persistance
+{ 
     public class TradeOfExileDbContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
