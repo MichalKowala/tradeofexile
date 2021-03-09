@@ -9,7 +9,7 @@ namespace tradeofexile.persistance.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private TradeOfExileDbContext _dbContext;
+        protected readonly TradeOfExileDbContext _dbContext;
         public BaseRepository(TradeOfExileDbContext dbContext)
         {
             _dbContext = dbContext;

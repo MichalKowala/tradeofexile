@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\tradeofexile.application\tradeofexile.application.csproj" />
+    <ProjectReference Include="..\tradeofexile.models\tradeofexile.models.csproj" />
+    <ProjectReference Include="..\tradeofexile.persistance\tradeofexile.persistance.csproj" />
+  </ItemGroup>
+
 </Project>

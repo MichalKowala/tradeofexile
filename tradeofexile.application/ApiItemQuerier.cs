@@ -16,6 +16,7 @@ namespace tradeofexile.infrastructure
             parametriziedUrl = ApplyAndClauseToUrl(parametriziedUrl);
             parametriziedUrl = ApplyRarityParameterToUrl(itemRarity, parametriziedUrl);
             parametriziedUrl = ApplyFormatParameterToUrl(responseFormat, parametriziedUrl);
+            parametriziedUrl += "&limit=500";
             return parametriziedUrl;
         }
         

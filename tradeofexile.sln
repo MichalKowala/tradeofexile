@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tradeofexile", "tradeofexile\tradeofexile.csproj", "{9A687EB3-C271-47D9-9EAF-6ABE44778EE6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tradeofexile.application", "tradeofexile.infrastructure\tradeofexile.application.csproj", "{96732C54-068A-4AE0-ACEA-0AF2F3AA83BA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tradeofexile.models", "tradeofexile.models\tradeofexile.models.csproj", "{BC70F194-7C6E-422B-8AE5-813E35C66FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tradeofexile.persistance", "tradeofexile.persistance\tradeofexile.persistance.csproj", "{E0EB6F02-2354-4F84-985E-53B970DF9D0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tradeofexile.persistance", "tradeofexile.persistance\tradeofexile.persistance.csproj", "{E0EB6F02-2354-4F84-985E-53B970DF9D0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tradeofexile.application", "tradeofexile.application\tradeofexile.application.csproj", "{45D5A1B6-3AF7-4946-AE0C-39683DBCBD7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{9A687EB3-C271-47D9-9EAF-6ABE44778EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A687EB3-C271-47D9-9EAF-6ABE44778EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A687EB3-C271-47D9-9EAF-6ABE44778EE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96732C54-068A-4AE0-ACEA-0AF2F3AA83BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96732C54-068A-4AE0-ACEA-0AF2F3AA83BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96732C54-068A-4AE0-ACEA-0AF2F3AA83BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96732C54-068A-4AE0-ACEA-0AF2F3AA83BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC70F194-7C6E-422B-8AE5-813E35C66FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC70F194-7C6E-422B-8AE5-813E35C66FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC70F194-7C6E-422B-8AE5-813E35C66FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{E0EB6F02-2354-4F84-985E-53B970DF9D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0EB6F02-2354-4F84-985E-53B970DF9D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0EB6F02-2354-4F84-985E-53B970DF9D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45D5A1B6-3AF7-4946-AE0C-39683DBCBD7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D5A1B6-3AF7-4946-AE0C-39683DBCBD7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D5A1B6-3AF7-4946-AE0C-39683DBCBD7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D5A1B6-3AF7-4946-AE0C-39683DBCBD7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

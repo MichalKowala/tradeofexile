@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using tradeofexile.models.Items;
+using tradeofexile.persistance.EntitiesConfiguration;
 
 namespace tradeofexile.persistance
 { 
@@ -14,6 +15,9 @@ namespace tradeofexile.persistance
         }
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ItemEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ExtendedEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new PriceEntityConfiguration());
         }
     }
 }

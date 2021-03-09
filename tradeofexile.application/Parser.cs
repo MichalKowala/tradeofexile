@@ -6,6 +6,7 @@ using System.Threading;
 using tradeofexile.models;
 using tradeofexile.models.Items;
 using System.Linq;
+using tradeofexile.models.Enums;
 
 namespace tradeofexile.infrastructure
 {
@@ -50,7 +51,7 @@ namespace tradeofexile.infrastructure
         public static Price ParseStringPriceToObjectPrice(string stringPrice)
         {
             string[] words = stringPrice.Split(' ');
-            Price price = new Price(new double(),CurrencyType.Unspecified);
+            Price price = new Price(new double(), CurrencyType.Unspecified);
             for (int i = 0; i < words.Count(); i++)
             {
                 if (stringToEnumCurrency.ContainsKey(words[i]))
@@ -69,6 +70,23 @@ namespace tradeofexile.infrastructure
             }
             return price;
         }
+        public static readonly Dictionary<ItemCategory, List<GamepediaItemClass>> itemCategoryToGamepediaItemClass = new Dictionary<ItemCategory, List<GamepediaItemClass>>()
+        {
+            { ItemCategory.Weapons,new List<GamepediaItemClass>(){
+                GamepediaItemClass.Bows,
+                GamepediaItemClass.Claws,
+                GamepediaItemClass.OneHandAxes,
+                GamepediaItemClass.Sceptres,
+                GamepediaItemClass.Staves,
+                GamepediaItemClass.TwoHandAxes,
+                GamepediaItemClass.TwoHandMaces,
+                GamepediaItemClass.Wands,
+            }},
+            {ItemCategory.Jewels, new List<GamepediaItemClass>(){GamepediaItemClass.Jewels} }
+
+
+
+        };
         private static readonly Dictionary<string, ItemCategory> stringToEnumItemCategory = new Dictionary<string, ItemCategory>()
         {
             {"gems",ItemCategory.Gems },
