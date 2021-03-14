@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Text;
 using tradeofexile.models.Items;
 using System.Linq;
+using tradeofexile.application.Abstraction;
 
 namespace tradeofexile.infrastructure
 {
-    public static class Pricer
+    public  class Pricer : IPricer
     {
-        public static void UpdateExchangeTable(Item item)
+        IParser _parser;
+        public Pricer(IParser parser)
+        {
+            _parser = parser;
+        }
+        public  void UpdateExchangeTable(Item item)
         {
             CurrencyType currencyType = CurrencyType.Unspecified;
-            if (Parser.stringToEnumCurrency.ContainsKey(item.Extended.BaseType))
-                currencyType = Parser.stringToEnumCurrency[item.Extended.BaseType];
+            if (_parser.GetStringToEnumCurrency().ContainsKey(item.Extended.BaseType))
+                currencyType = _parser.GetStringToEnumCurrency()[item.Extended.BaseType];
             if (currencyType != CurrencyType.Unspecified)
             {
                 if (ExchangeTable.ContainsKey(currencyType))
@@ -25,7 +31,7 @@ namespace tradeofexile.infrastructure
                 }
             }
         }
-        public static Price GetRate(CurrencyType pay, CurrencyType get)
+        public  Price GetRate(CurrencyType pay, CurrencyType get)
         {
             if (ExchangeTable.ContainsKey(pay))
             {
@@ -51,21 +57,6 @@ namespace tradeofexile.infrastructure
             }
             else return new Price(1, pay);
         }
-
-        public static void AddPricedItemToDictionary(Item item)
-        {
-            if (ItemsWithOffers.Keys.Where(x => x.Name == item.Name).Any())
-            {
-                Item i = ItemsWithOffers.Keys.Where(x => x.Name == item.Name).First();
-                ItemsWithOffers[i].Add(item.Price);
-            }
-            else
-            {
-                ItemsWithOffers.Add(item, new List<Price>() { item.Price });
-            }
-        }
-
         public static Dictionary<CurrencyType, List<Price>> ExchangeTable = new Dictionary<CurrencyType, List<Price>>();
-        public static Dictionary<Item, List<Price>> ItemsWithOffers = new Dictionary<Item, List<Price>>();
     }
 }

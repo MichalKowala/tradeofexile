@@ -7,12 +7,13 @@ using tradeofexile.models;
 using tradeofexile.models.Items;
 using System.Linq;
 using tradeofexile.models.Enums;
+using tradeofexile.application.Abstraction;
 
 namespace tradeofexile.infrastructure
 {
-    public static class Parser
+    public  class Parser : IParser
     {
-        public static Stash ParseResponseStashIntoObjectStash(ResponseStash responseStash)
+        public  Stash ParseResponseStashIntoObjectStash(ResponseStash responseStash)
         {
             Stash stash = new Stash();
             stash.IsPublic = responseStash.IsPublic;
@@ -22,7 +23,7 @@ namespace tradeofexile.infrastructure
                 stash.Items.Add(ParseResponseItemIntoObjectItem(responseItem));
             return stash;
         }
-        public static Item ParseResponseItemIntoObjectItem(ResponseItem responseItem)
+        public  Item ParseResponseItemIntoObjectItem(ResponseItem responseItem)
         {
             Item item = new Item();
             item.Name = responseItem.Name;
@@ -35,20 +36,20 @@ namespace tradeofexile.infrastructure
                 item.Price = ParseStringPriceToObjectPrice(responseItem.Price);
             return item;
         }
-        private static ItemCategory ParseStringCategoryToObjectCategory(string stringCategory)
+        public  ItemCategory ParseStringCategoryToObjectCategory(string stringCategory)
         {
             if (stringToEnumItemCategory.ContainsKey(stringCategory))
                 return stringToEnumItemCategory[stringCategory];
             else
                 return ItemCategory.Unspecified;
         }
-        public static LeagueType ParseStringLeagueToObjectLeague(string stringLeague)
+        public  LeagueType ParseStringLeagueToObjectLeague(string stringLeague)
         {
             if (stringToEnumLeague.ContainsKey(stringLeague))
                 return stringToEnumLeague[stringLeague];
             return LeagueType.Other;
         }
-        public static Price ParseStringPriceToObjectPrice(string stringPrice)
+        public  Price ParseStringPriceToObjectPrice(string stringPrice)
         {
             string[] words = stringPrice.Split(' ');
             Price price = new Price(new double(), CurrencyType.Unspecified);
@@ -70,7 +71,7 @@ namespace tradeofexile.infrastructure
             }
             return price;
         }
-        public static readonly Dictionary<ItemCategory, List<GamepediaItemClass>> itemCategoryToGamepediaItemClass = new Dictionary<ItemCategory, List<GamepediaItemClass>>()
+        public  readonly Dictionary<ItemCategory, List<GamepediaItemClass>> itemCategoryToGamepediaItemClass = new Dictionary<ItemCategory, List<GamepediaItemClass>>()
         {
             { ItemCategory.Weapons,new List<GamepediaItemClass>(){
                 GamepediaItemClass.Bows,
@@ -87,7 +88,7 @@ namespace tradeofexile.infrastructure
 
 
         };
-        private static readonly Dictionary<string, ItemCategory> stringToEnumItemCategory = new Dictionary<string, ItemCategory>()
+        private  readonly Dictionary<string, ItemCategory> stringToEnumItemCategory = new Dictionary<string, ItemCategory>()
         {
             {"gems",ItemCategory.Gems },
             {"weapons",ItemCategory.Weapons },
@@ -104,7 +105,7 @@ namespace tradeofexile.infrastructure
             {"cards", ItemCategory.Cards },
 
         };
-        public static readonly Dictionary<string, CurrencyType> stringToEnumCurrency = new Dictionary<string, CurrencyType>()
+        public  readonly Dictionary<string, CurrencyType> stringToEnumCurrency = new Dictionary<string, CurrencyType>()
         {
             {"alt",CurrencyType.AlterationOrb },
             {"Ancient Orb", CurrencyType.AncientOrb },
@@ -126,11 +127,20 @@ namespace tradeofexile.infrastructure
             {"fusing",CurrencyType.FusingOrb },
             {"mirror",CurrencyType.Mirror }
         };
-        private static readonly Dictionary<string, LeagueType> stringToEnumLeague = new Dictionary<string, LeagueType>()
+        private  readonly Dictionary<string, LeagueType> stringToEnumLeague = new Dictionary<string, LeagueType>()
         {
             {"Ritual",LeagueType.Ritual },
             {"Standard",LeagueType.Standard },
             {"Hardcore Ritual",LeagueType.HardcoreRitual }
         };
+
+        public  Dictionary<string, CurrencyType> GetStringToEnumCurrency()
+        {
+            return stringToEnumCurrency;
+        }
+        public Dictionary<ItemCategory, List<GamepediaItemClass>> GetItemCategorytoGamediaItemClassDictionary()
+        {
+            return itemCategoryToGamepediaItemClass;
+        }
     }
 }

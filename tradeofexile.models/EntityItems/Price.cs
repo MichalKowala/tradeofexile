@@ -17,5 +17,9 @@ namespace tradeofexile.models.Items
             Ammount = ammount;
             CurrencyType = currencyType;
         }
+        public Price()
+        {
+
+        }
     }
 }

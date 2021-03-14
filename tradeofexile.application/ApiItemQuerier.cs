@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tradeofexile.application.Abstraction;
 using tradeofexile.models.Enums;
 
 namespace tradeofexile.infrastructure
 {
-    public static class ApiItemQuerier
+    public  class ApiItemQuerier : IApiItemQuerier
     {
 
-        private static readonly string baseUrl = "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=name";
-        public static string GetItemAndRarityParametriziedGamepediaCallUrl(GamepediaItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
+        private readonly string baseUrl = "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=name";
+        public string GetItemAndRarityParametriziedGamepediaCallUrl(GamepediaItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
         {
             string parametriziedUrl = ApplyWhereClauseToUrl(baseUrl);
             parametriziedUrl = ApplyClassParameterToUrl(itemClass, parametriziedUrl);
@@ -20,27 +21,27 @@ namespace tradeofexile.infrastructure
             return parametriziedUrl;
         }
         
-        private static string ApplyWhereClauseToUrl(string url)
+        private  string ApplyWhereClauseToUrl(string url)
         {
             return $"{url}&where=";
         }
-        private static string ApplyAndClauseToUrl(string url)
+        private  string ApplyAndClauseToUrl(string url)
         {
             return $"{url} AND ";
         }
-        private static string ApplyClassParameterToUrl(GamepediaItemClass itemClass, string url)
+        private  string ApplyClassParameterToUrl(GamepediaItemClass itemClass, string url)
         {
             return $"{url}class=%22{gamepediaItemClassToUrlParameter[itemClass]}%22";
         }
-        private static string ApplyRarityParameterToUrl(ItemRarity itemRarity, string url)
+        private  string ApplyRarityParameterToUrl(ItemRarity itemRarity, string url)
         {
             return $"{url}rarity=%22{itemRarityToUrlRarityParameterDictionary[itemRarity].ToString()}%22";
         }
-        private static string ApplyFormatParameterToUrl(ResponseFormat format, string url)
+        private  string ApplyFormatParameterToUrl(ResponseFormat format, string url)
         {
             return $"{url}&format={format}";
         }
-        private static readonly Dictionary<GamepediaItemClass, string> gamepediaItemClassToUrlParameter = new Dictionary<GamepediaItemClass, string>()
+        private  readonly Dictionary<GamepediaItemClass, string> gamepediaItemClassToUrlParameter = new Dictionary<GamepediaItemClass, string>()
         {
             { GamepediaItemClass.Daggers,"Daggers" },
             { GamepediaItemClass.Claws,"Claws"},
@@ -61,7 +62,7 @@ namespace tradeofexile.infrastructure
             { GamepediaItemClass.Jewels,"Jewel" }
 
         };
-        private static Dictionary<ItemRarity, string> itemRarityToUrlRarityParameterDictionary = new Dictionary<ItemRarity, string>()
+        private  Dictionary<ItemRarity, string> itemRarityToUrlRarityParameterDictionary = new Dictionary<ItemRarity, string>()
         {
             {ItemRarity.Unique,"Unique" }
         };

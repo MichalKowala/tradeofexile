@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using tradeofexile.application.Abstraction;
 using tradeofexile.models;
 
 namespace tradeofexile.Controllers
@@ -12,10 +13,11 @@ namespace tradeofexile.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IItemInteractor _itemInteractor;
+        public HomeController(ILogger<HomeController> logger, IItemInteractor itemInteractor)
         {
             _logger = logger;
+            _itemInteractor = itemInteractor;
         }
 
         public IActionResult Index()
@@ -27,7 +29,11 @@ namespace tradeofexile.Controllers
         {
             return View();
         }
-
+        public IActionResult Starcraft()
+        {
+            _itemInteractor.GetPricedUniquesByItemCategory(models.Items.ItemCategory.Jewels);
+            throw new NotImplementedException();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
