@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using tradeofexile.application;
 using tradeofexile.persistance;
+using Hangfire;
+using Hangfire.MySql;
 
 namespace tradeofexile
 {
@@ -25,6 +27,9 @@ namespace tradeofexile
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnectionString"), new MySqlStorageOptions())));
+            services.AddHangfireServer();
             services.AddPersistance();
             services.AddApplication();
             services.AddControllersWithViews();
@@ -47,9 +52,9 @@ namespace tradeofexile
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
