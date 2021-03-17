@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.application.Interactors;
+using tradeofexile.application.Interfaces;
 using tradeofexile.infrastructure;
 
 namespace tradeofexile.application
@@ -13,7 +14,7 @@ namespace tradeofexile.application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            
+            services.AddTransient<IResponseHandler, ResponseHandler>();
             services.AddTransient<IApiHelper, ApiHelper>();
             services.AddTransient<IApiItemQuerier, ApiItemQuerier>();
             services.AddTransient<IItemExtensions, ItemExtensions>();

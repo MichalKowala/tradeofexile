@@ -30,7 +30,7 @@ namespace tradeofexile.infrastructure
         {
             foreach (Stash s in stashes)
             {
-                s.Items.RemoveAll(x => x.Price.Ammount==0);
+                s.Items.RemoveAll(x => x.Price==null);
             }
             return stashes;
         }

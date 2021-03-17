@@ -10,6 +10,7 @@ namespace tradeofexile.models.Items
         public bool IsPublic;
         public string AccountName;
         public LeagueType League;
-        public List<Item> Items;
+        public string ResponseId;
+        public List<Item> Items { get; set; } = new List<Item>();
     }
 }

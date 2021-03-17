@@ -16,8 +16,10 @@ namespace tradeofexile.infrastructure
         public  Stash ParseResponseStashIntoObjectStash(ResponseStash responseStash)
         {
             Stash stash = new Stash();
+            stash.ResponseId = responseStash.Id;
             stash.IsPublic = responseStash.IsPublic;
             stash.AccountName = responseStash.AccountName;
+            if (responseStash.League!=null)
             stash.League = ParseStringLeagueToObjectLeague(responseStash.League);
             foreach (ResponseItem responseItem in responseStash.Items)
                 stash.Items.Add(ParseResponseItemIntoObjectItem(responseItem));
@@ -26,6 +28,7 @@ namespace tradeofexile.infrastructure
         public  Item ParseResponseItemIntoObjectItem(ResponseItem responseItem)
         {
             Item item = new Item();
+            item.ResponseId = responseItem.Id;
             item.Name = responseItem.Name;
             item.League = ParseStringLeagueToObjectLeague(responseItem.League);
             item.Extended = new Extended();

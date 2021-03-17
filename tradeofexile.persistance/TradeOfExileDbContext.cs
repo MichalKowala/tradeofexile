@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using tradeofexile.models.EntityItems;
 using tradeofexile.models.Items;
 using tradeofexile.persistance.EntitiesConfiguration;
 
@@ -9,6 +10,7 @@ namespace tradeofexile.persistance
         public DbSet<Item> Items { get; set; }
         public DbSet<Extended> Extendeds { get; set; }
         public DbSet <Price> Prices { get; set; }
+        public DbSet <ResponseHandlerHelper> ResponseHandlerHelpers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;database=tradeofexiledb;user=root;pwd=HasloMaslo");

@@ -54,5 +54,10 @@ namespace tradeofexile.persistance.Repositories
             var record = GetById(Id);
             Update(record);
         }
+        public T GetRecentlyCreated()
+        {
+            var record = _dbContext.Set<T>().OrderByDescending(x => x.DateCreated).FirstOrDefault();
+            return record;
+        }
     }
 }
