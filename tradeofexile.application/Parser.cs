@@ -61,10 +61,7 @@ namespace tradeofexile.infrastructure
                 if (stringToEnumCurrency.ContainsKey(words[i]))
                 {
                     price.CurrencyType = stringToEnumCurrency[words[i]];
-                    words[i - 1].Replace('.', ',');
-                    double ammount;
-                    double.TryParse(words[i - 1], out ammount);
-                    price.Ammount = ammount;
+                    price.Ammount = ParseStringToDouble(words[i - 1]);
                     break;
                 }
                 else
@@ -73,6 +70,20 @@ namespace tradeofexile.infrastructure
                 }
             }
             return price;
+        }
+        private double ParseStringToDouble(string value)
+        {
+            double number = new double();
+            value = value.Replace(".", ",");
+            if (value.Contains('/'))
+            {
+                Double.TryParse(value.Split('/').ElementAt(0), out double numerator);
+                Double.TryParse(value.Split('/').ElementAt(2), out double denominator);
+                number = numerator / denominator;
+                return number;
+            }
+            Double.TryParse(value, out number);
+            return number;
         }
         public  readonly Dictionary<ItemCategory, List<GamepediaItemClass>> itemCategoryToGamepediaItemClass = new Dictionary<ItemCategory, List<GamepediaItemClass>>()
         {

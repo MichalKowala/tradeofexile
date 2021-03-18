@@ -1,32 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tradeofexile.application.Interfaces;
 using tradeofexile.models;
 using tradeofexile.models.Items;
 
 namespace tradeofexile.infrastructure
 {
-    public static class Filter
+    public  class Filter : IFilter
     {
-        public static List<Stash> ApplyAllFilters(List<Stash> stashes)
+        public  List<Stash> ApplyAllFilters(List<Stash> stashes)
         {
+            stashes = RemovePrivateStashes(stashes);
             stashes = RemoveEmptyStashes(stashes);
-            stashes = RemoveStandardLeagueStashes(stashes);
+           // stashes = RemoveStandardLeagueStashes(stashes);
             stashes = RemoveItemsWithNoPrice(stashes);
-            stashes = RemoveEmptyStashes(stashes);
             return stashes;
         }
-        public static List<Stash> RemoveEmptyStashes(List<Stash> stashes)
+        public List<Stash> RemovePrivateStashes(List<Stash> stashes)
+        {
+            stashes.RemoveAll(x => x.IsPublic == true);
+            return stashes;
+        }
+        public  List<Stash> RemoveEmptyStashes(List<Stash> stashes)
         {
             stashes.RemoveAll(x => x.Items.Count == 0 || x.AccountName == null);
             return stashes;
         }
-        public static List<Stash> RemoveStandardLeagueStashes(List<Stash> stashes)
+        public  List<Stash> RemoveStandardLeagueStashes(List<Stash> stashes)
         {
             stashes.RemoveAll(x => x.League == LeagueType.Standard);
             return stashes;
         }
-        public static List<Stash> RemoveItemsWithNoPrice(List<Stash> stashes)
+        public  List<Stash> RemoveItemsWithNoPrice(List<Stash> stashes)
         {
             foreach (Stash s in stashes)
             {
