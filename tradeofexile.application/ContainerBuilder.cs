@@ -14,6 +14,7 @@ namespace tradeofexile.application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddTransient<IJobsManager, JobsManager>();
             services.AddTransient<IResponseHandler, ResponseHandler>();
             services.AddTransient<IApiHelper, ApiHelper>();
             services.AddTransient<IApiItemQuerier, ApiItemQuerier>();
@@ -21,6 +22,8 @@ namespace tradeofexile.application
             services.AddTransient<IItemInteractor, ItemInteractor>();
             services.AddTransient<IParser, Parser>();
             services.AddTransient<IPricer, Pricer>();
+            services.AddTransient<IResponseHandler, ResponseHandler>();
+            services.AddTransient<IFilter, Filter>();
             return services;
         }
     }

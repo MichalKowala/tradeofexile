@@ -19,7 +19,7 @@ namespace tradeofexile.infrastructure
         }
         public List<Stash> RemovePrivateStashes(List<Stash> stashes)
         {
-            stashes.RemoveAll(x => x.IsPublic == true);
+            stashes.RemoveAll(x => x.IsPublic == false);
             return stashes;
         }
         public  List<Stash> RemoveEmptyStashes(List<Stash> stashes)

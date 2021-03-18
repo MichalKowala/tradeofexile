@@ -18,7 +18,7 @@ namespace tradeofexile.application
         }
         public void EnqueueAllJobs()
         {
-            RecurringJob.AddOrUpdate(() => _responseHandler.GetAndProcessPoeApiResponse(), Cron.Minutely);
+            RecurringJob.AddOrUpdate("apiCaller",() => _responseHandler.GetAndProcessPoeApiResponse(), Cron.Minutely);
         }
     }
 }
