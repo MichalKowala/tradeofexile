@@ -7,7 +7,7 @@ namespace tradeofexile.application.Abstraction
 {
     public interface IPricer
     {
-        public  void UpdateExchangeTable(Item item);
+        public  void AddOffer(CurrencyType pay, Price get);
         public  Price GetRate(CurrencyType pay, CurrencyType get);
     }
 }

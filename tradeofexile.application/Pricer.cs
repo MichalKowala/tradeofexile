@@ -4,59 +4,44 @@ using System.Text;
 using tradeofexile.models.Items;
 using System.Linq;
 using tradeofexile.application.Abstraction;
+using tradeofexile.application.Contracts.Persistence;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.infrastructure
 {
     public  class Pricer : IPricer
     {
-        IParser _parser;
-        public Pricer(IParser parser)
+      
+        private readonly IBaseRepository<CurrencyExchangeOffer> _currencyExchangeOfferRepository;
+        public Pricer(IBaseRepository<CurrencyExchangeOffer> currencyExchangeOffer)
         {
-            _parser = parser;
+  
+            _currencyExchangeOfferRepository = currencyExchangeOffer;
         }
-        public  void UpdateExchangeTable(Item item)
+       
+        public void AddOffer(CurrencyType fromCurrency, Price offer)
         {
-            CurrencyType currencyType = CurrencyType.Unspecified;
-            if (_parser.GetStringToEnumCurrency().ContainsKey(item.Extended.BaseType))
-                currencyType = _parser.GetStringToEnumCurrency()[item.Extended.BaseType];
-            if (currencyType != CurrencyType.Unspecified)
+            CurrencyExchangeOffer offerRecord = new CurrencyExchangeOffer()
             {
-                if (ExchangeTable.ContainsKey(currencyType))
-                {
-                    ExchangeTable[currencyType].Add(item.Price);
-                }
-                else
-                {
-                    ExchangeTable.Add(currencyType, new List<Price>() { item.Price });
-                }
-            }
+                FromCurrency = fromCurrency,
+                ToCurrency = offer.CurrencyType,
+                Rate = 1 / offer.Ammount
+            };
+            _currencyExchangeOfferRepository.Create(offerRecord);
         }
-        public  Price GetRate(CurrencyType pay, CurrencyType get)
+        public Price GetRate(CurrencyType fromCurrency, CurrencyType toCurrency)
         {
-            if (ExchangeTable.ContainsKey(pay))
+            int divider = 0;
+            double rate = 0;
+            var offers = _currencyExchangeOfferRepository.GetAll().Where(x => x.FromCurrency == fromCurrency && x.ToCurrency == toCurrency);
+            foreach (CurrencyExchangeOffer offer in offers)
             {
-                double ammount = 0;
-                int divider = 0;
-                List<Price> offers = ExchangeTable[pay];
-                foreach (Price p in offers)
-                {
-
-                    if (p.CurrencyType == get)
-                    {
-                        ammount += p.Ammount;
-                        divider++;
-                    }
-                    else
-                    {
-                        Price p2 = GetRate(p.CurrencyType, get);
-                        ammount += p2.Ammount * p.Ammount;
-                        divider++;
-                    }
-                }
-                return new Price(ammount / divider, get);
+                divider++;
+                rate += offer.Rate;
             }
-            else return new Price(1, pay);
+            if (divider != 0)
+                return new Price(rate / divider, toCurrency);
+            else return new Price(1, fromCurrency);
         }
-        public static Dictionary<CurrencyType, List<Price>> ExchangeTable = new Dictionary<CurrencyType, List<Price>>();
     }
 }
