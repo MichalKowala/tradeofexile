@@ -18,10 +18,10 @@ namespace tradeofexile
 {
     public class Program
     {
-        IServiceProvider provider { get; set; }
 
         public static void Main(string[] args)
         {
+            
             CreateHostBuilder(args).Build().Run();
         }
 

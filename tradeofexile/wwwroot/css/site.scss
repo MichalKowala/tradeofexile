@@ -1,0 +1,35 @@
+:root {
+    --primary-color-strong: #067c2d;
+    --primary-color-light: #02d348;
+}
+
+
+.container {
+
+    .top-bar {
+        display: flex;
+        justify-content:space-between;
+
+        .itemSearchBox {
+            width: 50%;
+        }
+
+        .leagueSelector {
+            width: 35%;
+        }
+    }
+
+    .content {
+        display: flex;
+        margin-top: 50px;
+
+        .left-menu {
+            width: 300px;
+            
+        }
+
+        .main {
+            flex: 1;
+        }
+    }
+}

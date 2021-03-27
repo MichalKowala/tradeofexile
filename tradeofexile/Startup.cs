@@ -28,10 +28,11 @@ namespace tradeofexile
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnectionString"), new MySqlStorageOptions())));
-            services.AddHangfireServer();
+            
             services.AddPersistance();
             services.AddApplication();
+            services.AddHangfireServer();
+            services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnectionString"), new MySqlStorageOptions())));
             services.AddControllersWithViews();
         }
 
@@ -51,6 +52,7 @@ namespace tradeofexile
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseHangfireDashboard();
             app.UseRouting();
             
             app.UseAuthorization();

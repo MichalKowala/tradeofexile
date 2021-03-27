@@ -1,8 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.19" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.19" />
+    <PackageReference Include="Hangfire.MySqlStorage" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\tradeofexile.application\tradeofexile.application.csproj" />
@@ -10,4 +22,12 @@
     <ProjectReference Include="..\tradeofexile.persistance\tradeofexile.persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
+ 
 </Project>
