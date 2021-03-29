@@ -1,0 +1,12 @@
+﻿@model LeagueSelectorViewModel
+@{
+}
+League: 
+@using (Html.BeginForm("ChangeSelectedLeague", "Home", FormMethod.Post))
+{
+    @Html.DropDownListFor(
+    x => x.SelectedLeague,
+    Model.LeagueSelectList.Where(x=>x.Value!=Context.Request.Cookies["selectedLeagueId"]).ToList(),
+    Context.Request.Cookies["selectedLeagueText"].ToString() ,
+    new { onChange = "this.form.submit()" })
+}

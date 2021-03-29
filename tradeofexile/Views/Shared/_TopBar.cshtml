@@ -1,8 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+
 
 <input type="search" class="itemSearchBox" placeholder="Search item by name">
-<div class="leagueSelector">Wybierz lige</div>
+
+
+<partial name="_LeagueSelector" model="new LeagueSelectorViewModel()" />
+
