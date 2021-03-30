@@ -27,12 +27,11 @@ namespace tradeofexile
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            
             services.AddPersistance();
             services.AddApplication();
             services.AddHangfireServer();
             services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnectionString"), new MySqlStorageOptions())));
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
         }
 
