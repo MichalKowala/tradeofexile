@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using tradeofexile.models.Enums;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.application.Abstraction
 {

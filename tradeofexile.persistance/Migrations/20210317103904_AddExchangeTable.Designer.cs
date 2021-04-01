@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tradeofexile.persistance;
 
 namespace tradeofexile.persistance.Migrations
 {
     [DbContext(typeof(TradeOfExileDbContext))]
-    partial class TradeOfExileDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210317103904_AddExchangeTable")]
+    partial class AddExchangeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

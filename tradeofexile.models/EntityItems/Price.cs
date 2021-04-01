@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using tradeofexile.models.EntityItems;
 
-namespace tradeofexile.models.Items
+namespace tradeofexile.models.EntityItems
 {
     public class Price : BaseEntity
     {
@@ -16,6 +16,10 @@ namespace tradeofexile.models.Items
         {
             Ammount = ammount;
             CurrencyType = currencyType;
+        }
+        public Price()
+        {
+
         }
        
     }

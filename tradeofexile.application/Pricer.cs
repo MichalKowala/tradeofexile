@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 using System.Linq;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;

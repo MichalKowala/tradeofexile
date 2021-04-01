@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Threading;
 using tradeofexile.models;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 using System.Linq;
 using tradeofexile.models.Enums;
 using tradeofexile.application.Abstraction;
@@ -143,7 +143,8 @@ namespace tradeofexile.infrastructure
         {
             {"Ritual",LeagueType.Ritual },
             {"Standard",LeagueType.Standard },
-            {"Hardcore Ritual",LeagueType.HardcoreRitual }
+            {"Hardcore Ritual",LeagueType.HardcoreRitual },
+            {"Hardcore", LeagueType.Hardcore }
         };
 
         public Dictionary<string, CurrencyType> GetStringToEnumCurrency()

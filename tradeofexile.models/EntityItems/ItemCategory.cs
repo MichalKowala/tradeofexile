@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tradeofexile.models.Items
+namespace tradeofexile.models.EntityItems
 {
     public enum ItemCategory
     {

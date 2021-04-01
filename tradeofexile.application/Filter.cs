@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using tradeofexile.application.Interfaces;
 using tradeofexile.models;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.infrastructure
 {

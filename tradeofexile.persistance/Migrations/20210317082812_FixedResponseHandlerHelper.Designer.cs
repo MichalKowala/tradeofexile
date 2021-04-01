@@ -2,43 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tradeofexile.persistance;
 
 namespace tradeofexile.persistance.Migrations
 {
     [DbContext(typeof(TradeOfExileDbContext))]
-    partial class TradeOfExileDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210317082812_FixedResponseHandlerHelper")]
+    partial class FixedResponseHandlerHelper
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.4");
-
-            modelBuilder.Entity("tradeofexile.models.EntityItems.CurrencyExchangeOffer", b =>
-                {
-                    b.Property<byte[]>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("FromCurrency")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Rate")
-                        .HasColumnType("double");
-
-                    b.Property<int>("ToCurrency")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExchangeTable");
-                });
 
             modelBuilder.Entity("tradeofexile.models.EntityItems.ResponseHandlerHelper", b =>
                 {
@@ -54,7 +33,7 @@ namespace tradeofexile.persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ResponeHandlerHelpers");
+                    b.ToTable("ResponseHandlerHelpers");
                 });
 
             modelBuilder.Entity("tradeofexile.models.Items.Extended", b =>

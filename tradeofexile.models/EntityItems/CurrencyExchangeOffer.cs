@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.models.EntityItems
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.persistance.EntitiesConfiguration
 {

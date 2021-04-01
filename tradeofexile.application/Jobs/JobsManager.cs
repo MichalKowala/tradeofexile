@@ -5,7 +5,7 @@ using System.Text;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.application.Interfaces;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.application
 {

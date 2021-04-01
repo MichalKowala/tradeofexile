@@ -10,7 +10,7 @@ using tradeofexile.application.Abstraction;
 using tradeofexile.application.Interactors;
 using tradeofexile.infrastructure;
 using tradeofexile.models;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 using tradeofexile.persistance;
 using tradeofexile.persistance.Repositories;
 using Microsoft.Extensions.DependencyInjection;

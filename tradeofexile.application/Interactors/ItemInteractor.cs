@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.infrastructure;
-using tradeofexile.models.Items;
+using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.application.Interactors
 {
@@ -27,10 +28,11 @@ namespace tradeofexile.application.Interactors
         public List<Item> GetPricedUniquesByItemCategory(ItemCategory itemCategory)
         {
             var names = _itemExtensions.GetNamesOfUniquesByItemCategory(itemCategory);
-            var items = _itemRepository.GetAll().ToList().Where(x => names.Contains(x.Name)).ToList();
-            items = AppendPricesToItems(items);
+
+            var items = _itemRepository.GetAll().ToList().Where(x => names.Contains(x.Name)).ToList().Join(_priceRepository.GetAll().ToList(), i => i.Id, p => p.ItemId,
+                (i, p) => new { item = i, price = p }).Select(ip => ip.item).ToList();
             items = StackDuplicateItems(items);
-            throw new NotImplementedException();
+            return items;
         }
         public  List<Item> StackDuplicateItems(List<Item> items)
         {
@@ -76,23 +78,23 @@ namespace tradeofexile.application.Interactors
             }
             return new Price(ammount / divider, targetCurrency);
         }
-        private List<Item> AppendPricesToItems(List<Item> items)
-        {
-            List<Item> itemsWithPrice = new List<Item>();
-            List<Price> prices = _priceRepository.GetAll().ToList();
-            foreach (Item i in items)
-            {
-                if (prices.Any(x => x.ItemId == i.Id))
-                {
-                    i.Price = prices.Where(x => x.ItemId == i.Id).First();
-                }
-                else
-                {
-                    i.Price = null;
-                }
-                itemsWithPrice.Add(i);
-            }
-            return itemsWithPrice;
-        }
+        //private List<Item> AppendPricesToItems(List<Item> items)
+        //{
+        //    List<Item> itemsWithPrice = new List<Item>();
+        //    List<Price> prices = _priceRepository.GetAll().ToList();
+        //    foreach (Item i in items)
+        //    {
+        //        if (prices.Any(x => x.ItemId == i.Id))
+        //        {
+        //            i.Price = prices.Where(x => x.ItemId == i.Id).First();
+        //        }
+        //        else
+        //        {
+        //            i.Price = null;
+        //        }
+        //        itemsWithPrice.Add(i);
+        //    }
+        //    return itemsWithPrice;
+        //}
     }
 }
