@@ -11,8 +11,8 @@ namespace tradeofexile.application
 {
     public class JobsManager : IJobsManager
     {
-        private readonly IResponseHandler _responseHandler;
-        public JobsManager(IResponseHandler responseHandler)
+        private readonly IPoeApiIResponseHandler _responseHandler;
+        public JobsManager(IPoeApiIResponseHandler responseHandler)
         {
             _responseHandler = responseHandler;
         }

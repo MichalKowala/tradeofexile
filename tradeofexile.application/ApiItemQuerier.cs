@@ -10,7 +10,7 @@ namespace tradeofexile.infrastructure
     {
 
         private readonly string baseUrl = "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=name";
-        public string GetItemAndRarityParametriziedGamepediaCallUrl(GamepediaItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
+        public string GetParametriziedGamepediaCallUrl(GamepediaItemClass itemClass, ItemRarity itemRarity, ResponseFormat responseFormat)
         {
             string parametriziedUrl = ApplyWhereClauseToUrl(baseUrl);
             parametriziedUrl = ApplyClassParameterToUrl(itemClass, parametriziedUrl);

@@ -15,9 +15,14 @@ namespace tradeofexile.Controllers
 {
     public class HomeController : Controller
     {
-       
+        IGamepediaResponseHandler _ext;
+        public HomeController(IGamepediaResponseHandler ext)
+        {
+            _ext = ext;
+        }
         public IActionResult Index()
         {
+            _ext.Testu();
             return View();
         }
 

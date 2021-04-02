@@ -11,5 +11,6 @@ namespace tradeofexile.Models
         public string Name { get; set; }
         public PriceModel Price { get; set; }
         public Uri IconLink { get; set; }
+        public LeagueType League { get; set; }
     }
 }

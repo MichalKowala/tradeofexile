@@ -95,6 +95,7 @@ namespace tradeofexile.infrastructure
                 GamepediaItemClass.TwoHandMaces,
                 GamepediaItemClass.Wands,
             }},
+           
             {ItemCategory.Jewels, new List<GamepediaItemClass>(){GamepediaItemClass.Jewels} }
 
 

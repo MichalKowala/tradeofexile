@@ -41,7 +41,11 @@ namespace tradeofexile.persistance.Repositories
         {
             return _dbContext.Set<T>().Where(predicate).AsQueryable();
         }
-
+        public bool Exists(Func<T, bool> predicate)
+        {
+            return _dbContext.Set<T>().Any(predicate);
+        }
+        
         public T GetById(Guid id)
         {
             return _dbContext.Set<T>().Find(id);

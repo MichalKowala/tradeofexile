@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tradeofexile.persistance;
 
 namespace tradeofexile.persistance.Migrations
 {
     [DbContext(typeof(TradeOfExileDbContext))]
-    partial class TradeOfExileDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210401205411_AddUniqueItemNameTable")]
+    partial class AddUniqueItemNameTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,24 +42,7 @@ namespace tradeofexile.persistance.Migrations
                     b.ToTable("ExchangeTable");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.EntityItems.ResponseHandlerHelper", b =>
-                {
-                    b.Property<byte[]>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("NextCallId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ResponeHandlerHelpers");
-                });
-
-            modelBuilder.Entity("tradeofexile.models.Items.Extended", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Extended", b =>
                 {
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()

@@ -6,10 +6,11 @@ using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.application.Abstraction
 {
-    public interface IItemExtensions
+    public interface IGamepediaResponseHandler
     {
-        public List<string> GetNamesOfUniquesByGamepediaItemClass(GamepediaItemClass itemClass);
-        public List<string> GetNamesOfUniquesByItemCategory(ItemCategory itemCategory);
+        public List<string> GetUniqueNames(GamepediaItemClass itemClass);
+        public List<string> GetUniqueNames(ItemCategory itemCategory);
         public List<string> GetListOfCurrencyItems();
+        public void UpdateUniqueNames();
     }
 }

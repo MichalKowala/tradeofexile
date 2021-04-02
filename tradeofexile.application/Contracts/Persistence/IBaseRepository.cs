@@ -17,6 +17,7 @@ namespace tradeofexile.application.Contracts.Persistence
         T GetById(Guid id);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Func<T, bool> predicate);
+        bool Exists(Func<T, bool> predicate);
         T GetRecentlyCreated();
     }
 }

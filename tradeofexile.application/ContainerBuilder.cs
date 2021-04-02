@@ -15,14 +15,14 @@ namespace tradeofexile.application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IJobsManager, JobsManager>();
-            services.AddTransient<IResponseHandler, ResponseHandler>();
+            services.AddTransient<IPoeApiIResponseHandler, PoeApiResponseHandler>();
             services.AddTransient<IApiHelper, ApiHelper>();
             services.AddTransient<IApiItemQuerier, ApiItemQuerier>();
-            services.AddTransient<IItemExtensions, ItemExtensions>();
+            services.AddTransient<IGamepediaResponseHandler, GamepediaResponseHandler>();
             services.AddTransient<IItemInteractor, ItemInteractor>();
             services.AddTransient<IParser, Parser>();
             services.AddTransient<IPricer, Pricer>();
-            services.AddTransient<IResponseHandler, ResponseHandler>();
+            services.AddTransient<IPoeApiIResponseHandler, PoeApiResponseHandler>();
             services.AddTransient<IFilter, Filter>();
             return services;
         }
