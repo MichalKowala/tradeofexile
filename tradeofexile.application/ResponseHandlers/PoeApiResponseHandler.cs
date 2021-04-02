@@ -9,6 +9,8 @@ using tradeofexile.application.Interfaces;
 using tradeofexile.models;
 using tradeofexile.models.EntityItems;
 using System.Threading;
+using tradeofexile.application;
+
 namespace tradeofexile.infrastructure
 {
     public class PoeApiResponseHandler : IPoeApiIResponseHandler
@@ -57,15 +59,14 @@ namespace tradeofexile.infrastructure
         }
         private void ProcessItems(List<Item> items)
         {
-            Dictionary<string, CurrencyType> stringToCurrency = _parser.GetStringToEnumCurrency();
             foreach (Item i in items)
             {
                 if (i.Extended.Category==ItemCategory.Currency)
                 {
-                    if (stringToCurrency.ContainsKey(i.Extended.BaseType))
+                    if (ParsingTable.stringToEnumCurrency.ContainsKey(i.Extended.BaseType))
                     {
                         Console.WriteLine("asdaqsd");
-                        _pricer.AddOffer(stringToCurrency[i.Extended.BaseType], i.Price);
+                        _pricer.AddOffer(ParsingTable.stringToEnumCurrency[i.Extended.BaseType], i.Price);
                     }
                 }
                 else

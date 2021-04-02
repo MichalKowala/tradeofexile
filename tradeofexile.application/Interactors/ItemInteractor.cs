@@ -78,23 +78,6 @@ namespace tradeofexile.application.Interactors
             }
             return new Price(ammount / divider, targetCurrency);
         }
-        private List<Item> AppendPricesToItems(List<Item> items)
-        {
-            List<Item> itemsWithPrice = new List<Item>();
-            List<Price> prices = _priceRepository.GetAll().ToList();
-            foreach (Item i in items)
-            {
-                if (prices.Any(x => x.ItemId == i.Id))
-                {
-                    i.Price = prices.Where(x => x.ItemId == i.Id).First();
-                }
-                else
-                {
-                    i.Price = null;
-                }
-                itemsWithPrice.Add(i);
-            }
-            return itemsWithPrice;
-        }
+       
     }
 }

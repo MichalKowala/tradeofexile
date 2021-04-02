@@ -6,6 +6,7 @@ using tradeofexile.models.EntityItems;
 using tradeofexile.application.Contracts.Persistence;
 using System;
 using System.Linq;
+using tradeofexile.application;
 
 namespace tradeofexile.infrastructure
 {
@@ -40,7 +41,7 @@ namespace tradeofexile.infrastructure
             List<string> names = new List<string>();
             try
             {
-                List<GamepediaItemClass> itemClasses = _parser.GetItemCategorytoGamediaItemClassDictionary()[itemCategory];
+                List<GamepediaItemClass> itemClasses = ParsingTable.itemCategoryToGamepediaItemClass[itemCategory];
                 foreach (GamepediaItemClass itemClass in itemClasses)
                 {
                     names.AddRange(GetUniqueNames(itemClass));

@@ -14,7 +14,5 @@ namespace tradeofexile.application.Abstraction
         public LeagueType ParseStringLeagueToObjectLeague(string stringLeague);
         public Price ParseStringPriceToObjectPrice(string stringPrice);
         public ItemCategory ParseStringCategoryToObjectCategory(string stringCategory);
-        public Dictionary<ItemCategory, List<GamepediaItemClass>> GetItemCategorytoGamediaItemClassDictionary();
-        public Dictionary<string, CurrencyType> GetStringToEnumCurrency();
     }
 }
