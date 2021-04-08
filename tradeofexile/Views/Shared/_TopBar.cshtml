@@ -1,8 +1,19 @@
 ﻿
 
+<div class="item-searchbox-container">
+    <input type="search" class="item-searchbox" placeholder="Search item by name">
 
-<input type="search" class="itemSearchBox" placeholder="Search item by name">
+</div>
 
 
-<partial name="_LeagueSelector" model="new LeagueSelectorViewModel()" />
+
+<div class="league-selector-container">
+
+
+    <div class="league-selector-description">
+        League:
+    </div>
+
+    <partial name="_LeagueSelector" model="new LeagueSelectorViewModel()" />
+</div>
 

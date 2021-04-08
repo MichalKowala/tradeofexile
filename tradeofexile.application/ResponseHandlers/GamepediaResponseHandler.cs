@@ -36,6 +36,7 @@ namespace tradeofexile.infrastructure
             }
             return names;
         }
+
         public  List<string> GetUniqueNames(ItemCategory itemCategory)
         {
             List<string> names = new List<string>();
@@ -47,9 +48,9 @@ namespace tradeofexile.infrastructure
                     names.AddRange(GetUniqueNames(itemClass));
                 }
             }
-            catch 
+            catch
             {
-                
+
             }
             return names;
         }

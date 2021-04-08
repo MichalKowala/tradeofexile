@@ -14,23 +14,33 @@ namespace tradeofexile.application.Interactors
     {
         private readonly IBaseRepository<Item> _itemRepository;
         private readonly IBaseRepository<Price> _priceRepository;
+        private readonly IBaseRepository<UniqueNameEntry> _namesRepository;
         private readonly IPricer _pricer;
-        private readonly IParser _parser;
-        private readonly IGamepediaResponseHandler _itemExtensions;
-        public ItemInteractor(IBaseRepository<Item> itemRepository, IBaseRepository<Price> priceRepository, IPricer pricer, IParser parser, IGamepediaResponseHandler itemExtensions)
+        private readonly IGamepediaResponseHandler _gamepediaResponseHandler;
+        public ItemInteractor(IBaseRepository<Item> itemRepository, IBaseRepository<Price> priceRepository, IPricer pricer, IGamepediaResponseHandler gamepediaResponseHandler, IBaseRepository<UniqueNameEntry> namesRepository)
         {
             _itemRepository = itemRepository;
             _priceRepository = priceRepository;
             _pricer = pricer;
-            _parser = parser;
-            _itemExtensions = itemExtensions;
+            _gamepediaResponseHandler = gamepediaResponseHandler;
+            _namesRepository = namesRepository;
         }
         public List<Item> GetPricedUniquesByItemCategory(ItemCategory itemCategory)
         {
-            var names = _itemExtensions.GetUniqueNames(itemCategory);
-
-            var items = _itemRepository.GetAll().ToList().Where(x => names.Contains(x.Name)).ToList().Join(_priceRepository.GetAll().ToList(), i => i.Id, p => p.ItemId,
-                (i, p) => new { item = i, price = p }).Select(ip => ip.item).ToList();
+            var nameEntries = _namesRepository.GetAll(x => x.ItemCategory == itemCategory).ToList();
+            var names = new List<string>();
+            foreach (UniqueNameEntry entry in nameEntries)
+            {
+                names.Add(entry.Name);
+            }
+            var items = _itemRepository.GetAll(x => names.Contains(x.Name)).ToList();
+            var ids = new List<string>();
+            foreach (Item i in items)
+            {
+                ids.Add(i.Id.ToString());
+            }
+            var pricez = _priceRepository.GetAll(x => ids.Contains(x.ItemId.ToString())).ToList();
+            items.Join(pricez, i => i.Id, p => p.ItemId, (i, p) => new { item = i, price = p }).Select(ip => ip.item).ToList();
             items = StackDuplicateItems(items);
             return items;
         }
