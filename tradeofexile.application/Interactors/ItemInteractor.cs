@@ -7,7 +7,8 @@ using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.infrastructure;
 using tradeofexile.models.EntityItems;
-
+using Microsoft.EntityFrameworkCore;
+ 
 namespace tradeofexile.application.Interactors
 {
     public class ItemInteractor : IItemInteractor
@@ -27,23 +28,18 @@ namespace tradeofexile.application.Interactors
         }
         public List<Item> GetPricedUniquesByItemCategory(ItemCategory itemCategory)
         {
-            var nameEntries = _namesRepository.GetAll(x => x.ItemCategory == itemCategory).ToList();
+            _gamepediaResponseHandler.UpdateUniqueNames();
+             var nameEntries = _namesRepository.GetAll(x => x.ItemCategory == itemCategory).ToList();
             var names = new List<string>();
             foreach (UniqueNameEntry entry in nameEntries)
             {
                 names.Add(entry.Name);
             }
-            var items = _itemRepository.GetAll(x => names.Contains(x.Name)).ToList();
-            var ids = new List<string>();
-            foreach (Item i in items)
-            {
-                ids.Add(i.Id.ToString());
-            }
-            var pricez = _priceRepository.GetAll(x => ids.Contains(x.ItemId.ToString())).ToList();
-            items.Join(pricez, i => i.Id, p => p.ItemId, (i, p) => new { item = i, price = p }).Select(ip => ip.item).ToList();
-            items = StackDuplicateItems(items);
+            var itemss = _itemRepository.GetAll(x => names.Contains(x.Name)).Include(x => x.Price).ToList();
+            var items = _itemRepository.GetAll(x => x.Price, y => names.Contains(y.Name)).ToList();
             return items;
         }
+
         public  List<Item> StackDuplicateItems(List<Item> items)
         {
             List<string> checkedNames = new List<string>();

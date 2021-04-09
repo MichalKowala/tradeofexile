@@ -70,11 +70,13 @@ namespace tradeofexile.infrastructure
                     }
                 }
                 else
+                    if (i.Price!=null)
                     _itemRepository.Create(i);
             }
         }
         private PoeApiResponse GetResponseFromPoeApi()
         {
+            
             ResponseHandlerHelper oldHelper = _responseHandlerHelperRepository.GetRecentlyCreated();
             var jsonResponse = _apiHelper.GetResponseFromApi(_url + oldHelper.NextCallId);
             PoeApiResponse classResponse = JsonConvert.DeserializeObject<PoeApiResponse>(jsonResponse);

@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using tradeofexile.models.EntityItems;
+using System.Linq.Expressions;
 
 namespace tradeofexile.application.Contracts.Persistence
 {
@@ -17,6 +18,7 @@ namespace tradeofexile.application.Contracts.Persistence
         T GetById(Guid id);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Func<T, bool> predicate);
+        IQueryable<T> GetAll<TInclude>(Expression<Func<T, TInclude>> include, Func<T, bool> predicate);
         bool Exists(Func<T, bool> predicate);
         T GetRecentlyCreated();
     }

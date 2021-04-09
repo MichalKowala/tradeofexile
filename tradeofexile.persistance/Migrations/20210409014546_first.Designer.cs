@@ -9,8 +9,8 @@ using tradeofexile.persistance;
 namespace tradeofexile.persistance.Migrations
 {
     [DbContext(typeof(TradeOfExileDbContext))]
-    [Migration("20210317103904_AddExchangeTable")]
-    partial class AddExchangeTable
+    [Migration("20210409014546_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,24 +42,7 @@ namespace tradeofexile.persistance.Migrations
                     b.ToTable("ExchangeTable");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.EntityItems.ResponseHandlerHelper", b =>
-                {
-                    b.Property<byte[]>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("NextCallId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ResponeHandlerHelpers");
-                });
-
-            modelBuilder.Entity("tradeofexile.models.Items.Extended", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Extended", b =>
                 {
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,12 +62,16 @@ namespace tradeofexile.persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ItemId")
+                        .IsUnique();
+
                     b.ToTable("Extendeds");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.Items.Item", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Item", b =>
                 {
                     b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("varbinary(16)");
 
                     b.Property<DateTime>("DateCreated")
@@ -107,7 +94,7 @@ namespace tradeofexile.persistance.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.Items.Price", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Price", b =>
                 {
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,33 +120,65 @@ namespace tradeofexile.persistance.Migrations
                     b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.Items.Item", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.ResponseHandlerHelper", b =>
                 {
-                    b.HasOne("tradeofexile.models.Items.Extended", "Extended")
-                        .WithOne("Item")
-                        .HasForeignKey("tradeofexile.models.Items.Item", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
 
-                    b.Navigation("Extended");
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("NextCallId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ResponeHandlerHelpers");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.Items.Price", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.UniqueNameEntry", b =>
                 {
-                    b.HasOne("tradeofexile.models.Items.Item", "Item")
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("ItemCategory")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UniqueItemNames");
+                });
+
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Extended", b =>
+                {
+                    b.HasOne("tradeofexile.models.EntityItems.Item", "Item")
+                        .WithOne("Extended")
+                        .HasForeignKey("tradeofexile.models.EntityItems.Extended", "ItemId");
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Price", b =>
+                {
+                    b.HasOne("tradeofexile.models.EntityItems.Item", "Item")
                         .WithOne("Price")
-                        .HasForeignKey("tradeofexile.models.Items.Price", "ItemId");
+                        .HasForeignKey("tradeofexile.models.EntityItems.Price", "ItemId");
 
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("tradeofexile.models.Items.Extended", b =>
+            modelBuilder.Entity("tradeofexile.models.EntityItems.Item", b =>
                 {
-                    b.Navigation("Item");
-                });
+                    b.Navigation("Extended");
 
-            modelBuilder.Entity("tradeofexile.models.Items.Item", b =>
-                {
                     b.Navigation("Price");
                 });
 #pragma warning restore 612, 618

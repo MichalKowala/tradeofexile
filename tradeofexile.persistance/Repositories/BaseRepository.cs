@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.models.EntityItems;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace tradeofexile.persistance.Repositories
 {
@@ -41,6 +43,12 @@ namespace tradeofexile.persistance.Repositories
         {
             return _dbContext.Set<T>().Where(predicate).AsQueryable();
         }
+     
+        public IQueryable<T> GetAll<TInclude>(Expression<Func<T,TInclude>> include, Func<T,bool> predicate)
+        {
+            return _dbContext.Set<T>().Include(include).Where(predicate).AsQueryable();
+        }
+
         public bool Exists(Func<T, bool> predicate)
         {
             return _dbContext.Set<T>().Any(predicate);
