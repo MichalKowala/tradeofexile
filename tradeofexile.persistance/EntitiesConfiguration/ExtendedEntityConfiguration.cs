@@ -8,7 +8,7 @@ namespace tradeofexile.persistance.EntitiesConfiguration
     {
         public override void ConfigureEntity(EntityTypeBuilder<Extended> builder)
         {
-            builder.HasOne(x => x.Item).WithOne(x => x.Extended).HasForeignKey<Item>(x=>x.Id);
+            builder.HasOne<Item>(x => x.Item).WithOne(x => x.Extended).HasForeignKey<Extended>(x => x.ItemId);
             builder.ToTable("Extendeds");
         }
     }

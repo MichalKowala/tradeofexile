@@ -8,6 +8,7 @@ namespace tradeofexile.persistance.EntitiesConfiguration
     {
         public override void ConfigureEntity(EntityTypeBuilder<Price> builder)
         {
+            builder.HasOne(x => x.Item).WithOne(x => x.Price).HasForeignKey<Price>(x => x.ItemId);
             builder.ToTable("Prices");
         }
     }
