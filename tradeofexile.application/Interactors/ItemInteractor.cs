@@ -28,14 +28,12 @@ namespace tradeofexile.application.Interactors
         }
         public List<Item> GetPricedUniquesByItemCategory(ItemCategory itemCategory)
         {
-            _gamepediaResponseHandler.UpdateUniqueNames();
              var nameEntries = _namesRepository.GetAll(x => x.ItemCategory == itemCategory).ToList();
             var names = new List<string>();
             foreach (UniqueNameEntry entry in nameEntries)
             {
                 names.Add(entry.Name);
             }
-            var itemss = _itemRepository.GetAll(x => names.Contains(x.Name)).Include(x => x.Price).ToList();
             var items = _itemRepository.GetAll(x => x.Price, y => names.Contains(y.Name)).ToList();
             return items;
         }
