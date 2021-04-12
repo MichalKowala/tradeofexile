@@ -48,7 +48,8 @@ namespace tradeofexile.infrastructure
         }
 
         private List<Stash> GetStashesFromResponse(PoeApiResponse response)
-        {
+        {   
+
             List<Stash> stashes = new List<Stash>();
             foreach (ResponseStash responseStash in response.Stashes)
             {
@@ -65,7 +66,6 @@ namespace tradeofexile.infrastructure
                 {
                     if (ParsingTable.stringToEnumCurrency.ContainsKey(i.Extended.BaseType))
                     {
-                        Console.WriteLine("asdaqsd");
                         _pricer.AddOffer(ParsingTable.stringToEnumCurrency[i.Extended.BaseType], i.Price);
                     }
                 }
@@ -76,7 +76,6 @@ namespace tradeofexile.infrastructure
         }
         private PoeApiResponse GetResponseFromPoeApi()
         {
-            
             ResponseHandlerHelper oldHelper = _responseHandlerHelperRepository.GetRecentlyCreated();
             var jsonResponse = _apiHelper.GetResponseFromApi(_url + oldHelper.NextCallId);
             PoeApiResponse classResponse = JsonConvert.DeserializeObject<PoeApiResponse>(jsonResponse);

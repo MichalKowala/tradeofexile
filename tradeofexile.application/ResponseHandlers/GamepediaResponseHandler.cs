@@ -48,7 +48,7 @@ namespace tradeofexile.infrastructure
                     names.AddRange(GetUniqueNames(itemClass));
                 }
             }
-            catch
+            catch (Exception e)
             {
 
             }
@@ -63,7 +63,7 @@ namespace tradeofexile.infrastructure
                 List<string> uniques=GetUniqueNames((ItemCategory)i);
                 foreach (string name in uniques)
                 {
-                    if (!_uniqueNamesRepository.Exists(x => x.Name == "Steel Spirit"))
+                    if (!_uniqueNamesRepository.Exists(x => x.Name == name))
                     {
                         _uniqueNamesRepository.Create(new UniqueNameEntry() { Name = name, ItemCategory = (ItemCategory)i });
                     }

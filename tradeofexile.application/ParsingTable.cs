@@ -13,11 +13,11 @@ namespace tradeofexile.application
             {"gems",ItemCategory.Gems },
             {"weapons",ItemCategory.Weapons },
             {"armour",ItemCategory.Armour},
-            { "jewels",ItemCategory.Jewels },
-            { "maps",ItemCategory.Maps},
-            { "accessories", ItemCategory.Accessories},
+            {"jewels",ItemCategory.Jewels },
+            {"maps",ItemCategory.Maps},
+            {"accessories", ItemCategory.Accessories},
             {"watchstones", ItemCategory.Watchstones},
-            { "monsters",ItemCategory.Monsters},
+            {"monsters",ItemCategory.Monsters},
             {"flasks", ItemCategory.Flasks},
             {"heistequipment",ItemCategory.HeistEquipment},
             {"heistmission",ItemCategory.HeistMissions},
@@ -67,6 +67,31 @@ namespace tradeofexile.application
                 GamepediaItemClass.TwoHandMaces,
                 GamepediaItemClass.Wands,
             }},
+
+            { ItemCategory.Armour, new List<GamepediaItemClass>()
+            {
+                GamepediaItemClass.Gloves,
+                GamepediaItemClass.Boots,
+                GamepediaItemClass.BodyArmours,
+                GamepediaItemClass.Helmets,
+                GamepediaItemClass.Shields
+            }},
+
+            { ItemCategory.Accessories, new List<GamepediaItemClass>()
+            {
+                GamepediaItemClass.Rings,
+                GamepediaItemClass.Amulets,
+            }},
+
+            {ItemCategory.Flasks, new List<GamepediaItemClass>()
+            {
+                GamepediaItemClass.CriticalUtilityFlasks,
+                GamepediaItemClass.HybridFlasks,
+                GamepediaItemClass.LifeFlasks,
+                GamepediaItemClass.ManaFlasks,
+                GamepediaItemClass.UtilityFlasks
+            }},
+            {ItemCategory.Maps, new List<GamepediaItemClass>(){GamepediaItemClass.Maps} },
             {ItemCategory.Jewels, new List<GamepediaItemClass>(){GamepediaItemClass.Jewels} }
         };
     }

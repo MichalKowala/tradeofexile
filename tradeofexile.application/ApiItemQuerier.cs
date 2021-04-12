@@ -6,7 +6,7 @@ using tradeofexile.models.Enums;
 
 namespace tradeofexile.infrastructure
 {
-    public  class ApiItemQuerier : IApiItemQuerier
+    public class ApiItemQuerier : IApiItemQuerier
     {
 
         private readonly string baseUrl = "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=name";
@@ -20,29 +20,30 @@ namespace tradeofexile.infrastructure
             parametriziedUrl += "&limit=500";
             return parametriziedUrl;
         }
-        
-        private  string ApplyWhereClauseToUrl(string url)
+
+        private string ApplyWhereClauseToUrl(string url)
         {
             return $"{url}&where=";
         }
-        private  string ApplyAndClauseToUrl(string url)
+        private string ApplyAndClauseToUrl(string url)
         {
             return $"{url} AND ";
         }
-        private  string ApplyClassParameterToUrl(GamepediaItemClass itemClass, string url)
+        private string ApplyClassParameterToUrl(GamepediaItemClass itemClass, string url)
         {
             return $"{url}class=%22{gamepediaItemClassToUrlParameter[itemClass]}%22";
         }
-        private  string ApplyRarityParameterToUrl(ItemRarity itemRarity, string url)
+        private string ApplyRarityParameterToUrl(ItemRarity itemRarity, string url)
         {
             return $"{url}rarity=%22{itemRarityToUrlRarityParameterDictionary[itemRarity].ToString()}%22";
         }
-        private  string ApplyFormatParameterToUrl(ResponseFormat format, string url)
+        private string ApplyFormatParameterToUrl(ResponseFormat format, string url)
         {
             return $"{url}&format={format}";
         }
-        private  readonly Dictionary<GamepediaItemClass, string> gamepediaItemClassToUrlParameter = new Dictionary<GamepediaItemClass, string>()
+        private readonly Dictionary<GamepediaItemClass, string> gamepediaItemClassToUrlParameter = new Dictionary<GamepediaItemClass, string>()
         {
+            //Weapons
             { GamepediaItemClass.Daggers,"Daggers" },
             { GamepediaItemClass.Claws,"Claws"},
             { GamepediaItemClass.OneHandSwords,"One Hand Swords" },
@@ -54,15 +55,26 @@ namespace tradeofexile.infrastructure
             { GamepediaItemClass.TwoHandAxes,"Two Hand Axes" },
             { GamepediaItemClass.TwoHandMaces,"Two Hand Maces" },
             { GamepediaItemClass.Sceptres,"Sceptres" },
+             //Armour
+            { GamepediaItemClass.Gloves,"Gloves" },
+            { GamepediaItemClass.Boots,"Boots" },
+            { GamepediaItemClass.BodyArmours,"Body Armours" },
+            { GamepediaItemClass.Helmets, "Helmets" },
+            { GamepediaItemClass.Shields,"Shields" },
+            //Jewellery
+            { GamepediaItemClass.Rings, "Rings"},
+            { GamepediaItemClass.Amulets, "Amulets" },
+            //Flasks
             { GamepediaItemClass.LifeFlasks,"Life Flasks" },
             { GamepediaItemClass.ManaFlasks,"Mana Flasks" },
             { GamepediaItemClass.HybridFlasks,"Hybrid Flasks" },
             { GamepediaItemClass.UtilityFlasks,"Utility Flasks" },
             { GamepediaItemClass.CriticalUtilityFlasks,"Critical Utility Flasks" },
-            { GamepediaItemClass.Jewels,"Jewel" }
-
+            { GamepediaItemClass.Jewels,"Jewel" },
+            //Other
+            { GamepediaItemClass.Maps,"Maps" }
         };
-        private  Dictionary<ItemRarity, string> itemRarityToUrlRarityParameterDictionary = new Dictionary<ItemRarity, string>()
+        private Dictionary<ItemRarity, string> itemRarityToUrlRarityParameterDictionary = new Dictionary<ItemRarity, string>()
         {
             {ItemRarity.Unique,"Unique" }
         };
