@@ -24,6 +24,7 @@ namespace tradeofexile.application
             services.AddTransient<IPricer, Pricer>();
             services.AddTransient<IPoeApiIResponseHandler, PoeApiResponseHandler>();
             services.AddTransient<IFilter, Filter>();
+            services.AddTransient<ICacheProvider, CacheProvider>();
             return services;
         }
     }
