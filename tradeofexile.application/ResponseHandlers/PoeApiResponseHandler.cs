@@ -33,8 +33,15 @@ namespace tradeofexile.infrastructure
         }
         public void GetAndProcessPoeApiResponse()
         {
-            PoeApiResponse response = GetResponseFromPoeApi();
-            ProcessResponse(response);
+            try
+            {
+                PoeApiResponse response = GetResponseFromPoeApi();
+                ProcessResponse(response);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
         private void ProcessResponse(PoeApiResponse response)
         {
@@ -81,6 +88,7 @@ namespace tradeofexile.infrastructure
             PoeApiResponse classResponse = JsonConvert.DeserializeObject<PoeApiResponse>(jsonResponse);
             ResponseHandlerHelper newHelper = new ResponseHandlerHelper();
             newHelper.NextCallId = classResponse.Next_Change_Id;
+            if (newHelper.NextCallId!=null)
             _responseHandlerHelperRepository.Create(newHelper);
             return classResponse;
         }
