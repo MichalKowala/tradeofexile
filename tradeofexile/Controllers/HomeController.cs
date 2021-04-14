@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,13 @@ namespace tradeofexile.Controllers
 {
     public class HomeController : Controller
     {
-        IGamepediaResponseHandler _ext;
-        public HomeController(IGamepediaResponseHandler ext)
+        private readonly IMemoryCache _cache;
+        public HomeController(IMemoryCache cache)
         {
-            _ext = ext;
+            _cache = cache;
         }
         public IActionResult Index()
         {
-            _ext.Testu();
             return View();
         }
 

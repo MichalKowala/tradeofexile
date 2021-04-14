@@ -70,7 +70,6 @@ namespace tradeofexile.infrastructure
                 }
             }
         }
-
         public  List<string> GetListOfCurrencyItems()
         {
             List<string> listOfItems = new List<string>();

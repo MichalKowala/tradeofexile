@@ -5,7 +5,6 @@ using tradeofexile.models.EntityItems;
 using System.Linq;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;
-using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.infrastructure
 {

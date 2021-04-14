@@ -10,7 +10,10 @@ namespace tradeofexile.Models
     {
         public string Name { get; set; }
         public PriceModel Price { get; set; }
+        public List<PriceModel> OtherCurrencyPrices { get; set; } = new List<PriceModel>();
         public Uri IconLink { get; set; }
         public LeagueType League { get; set; }
+        public double SevenDaysChange { get; set; }
+        public int Occurances { get; set; } = 1;
     }
 }

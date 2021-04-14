@@ -8,7 +8,7 @@ using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.infrastructure;
 using tradeofexile.models.EntityItems;
 using Microsoft.EntityFrameworkCore;
- 
+
 namespace tradeofexile.application.Interactors
 {
     public class ItemInteractor : IItemInteractor
@@ -28,7 +28,7 @@ namespace tradeofexile.application.Interactors
         }
         public List<Item> GetPricedUniquesByItemCategory(ItemCategory itemCategory)
         {
-             var nameEntries = _namesRepository.GetAll(x => x.ItemCategory == itemCategory).ToList();
+            var nameEntries = _namesRepository.GetAll(x => x.ItemCategory == itemCategory).ToList();
             var names = new List<string>();
             foreach (UniqueNameEntry entry in nameEntries)
             {
@@ -37,51 +37,5 @@ namespace tradeofexile.application.Interactors
             var items = _itemRepository.GetAll(x => x.Price, y => names.Contains(y.Name)).ToList();
             return items;
         }
-
-        public  List<Item> StackDuplicateItems(List<Item> items)
-        {
-            List<string> checkedNames = new List<string>();
-            List<Item> stackedItems = new List<Item>();
-            foreach (Item i in items)
-            {
-                List<Item> stack = new List<Item>();
-                if (!checkedNames.Contains(i.Name))
-                {
-                    stack = items.Where(x => x.Name == i.Name).ToList();
-                    checkedNames.Add(i.Name);
-                    List<Price> prices = new List<Price>();
-                    foreach (Item stackItem in stack)
-                    {
-                        if (stackItem.Price != null)
-                            prices.Add(stackItem.Price);
-                    }
-                    Item stackedItem = stack.First();
-                    stackedItem.Price = GetAveragedPrice(prices);
-                    stackedItems.Add(stackedItem);
-                }
-            }
-            return stackedItems;
-        }
-        public  Price GetAveragedPrice(List<Price> pricesToAverage, CurrencyType targetCurrency = CurrencyType.ChaosOrb)
-        {
-            double ammount = 0;
-            int divider = 0;
-            foreach (Price price in pricesToAverage)
-            {
-                if (price.CurrencyType != targetCurrency)
-                {
-                    Price p = _pricer.GetRate(targetCurrency, price.CurrencyType);
-                    ammount += p.Ammount;
-                    divider++;
-                }
-                else
-                {
-                    ammount += price.Ammount;
-                    divider++;
-                }
-            }
-            return new Price(ammount / divider, targetCurrency);
-        }
-       
     }
 }

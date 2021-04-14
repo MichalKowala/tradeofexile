@@ -33,15 +33,9 @@ namespace tradeofexile.infrastructure
         }
         public void GetAndProcessPoeApiResponse()
         {
-            try
-            {
                 PoeApiResponse response = GetResponseFromPoeApi();
+                if (response!=null)
                 ProcessResponse(response);
-            }
-            catch (Exception e)
-            {
-
-            }
         }
         private void ProcessResponse(PoeApiResponse response)
         {
@@ -56,7 +50,6 @@ namespace tradeofexile.infrastructure
 
         private List<Stash> GetStashesFromResponse(PoeApiResponse response)
         {   
-
             List<Stash> stashes = new List<Stash>();
             foreach (ResponseStash responseStash in response.Stashes)
             {
