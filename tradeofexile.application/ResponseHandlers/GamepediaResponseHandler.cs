@@ -14,13 +14,11 @@ namespace tradeofexile.infrastructure
     {
         private readonly IApiItemQuerier _apiItemQuerier;
         private readonly IApiHelper _apiHelper;
-        private readonly IParser _parser;
         private readonly IBaseRepository<UniqueNameEntry> _uniqueNamesRepository;
-        public GamepediaResponseHandler(IApiItemQuerier apiItemQuerier, IApiHelper apiHelper, IParser parser, IBaseRepository<UniqueNameEntry> uniqueNamesRepository)
+        public GamepediaResponseHandler(IApiItemQuerier apiItemQuerier, IApiHelper apiHelper, IBaseRepository<UniqueNameEntry> uniqueNamesRepository)
         {
             _apiItemQuerier = apiItemQuerier;
             _apiHelper = apiHelper;
-            _parser = parser;
             _uniqueNamesRepository = uniqueNamesRepository;
         }
         public  List<string> GetUniqueNames(GamepediaItemClass itemClass)

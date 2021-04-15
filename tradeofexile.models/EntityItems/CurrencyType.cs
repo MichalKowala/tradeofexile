@@ -20,6 +20,7 @@ namespace tradeofexile.models.EntityItems
         Mirror,
         VaalOrb,
         OrbOfScouring,
-        Unspecified
+        Unspecified,
+
     }
 }

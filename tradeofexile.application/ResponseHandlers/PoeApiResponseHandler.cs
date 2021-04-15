@@ -68,6 +68,8 @@ namespace tradeofexile.infrastructure
                     {
                         _pricer.AddOffer(ParsingTable.stringToEnumCurrency[i.Extended.BaseType], i.Price);
                     }
+                    else
+                        _itemRepository.Create(i);
                 }
                 else
                     if (i.Price!=null)

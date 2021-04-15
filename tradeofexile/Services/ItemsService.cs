@@ -79,43 +79,21 @@ namespace tradeofexile.Services
 
         private void CalculatePriceRelatedProperties(ItemModel model, CurrencyType primaryCurrency, List<Price> prices)
         {
-            var averaged = CalculateAveragePrice(prices);
+            var averaged = _mapper.Map<Price,PriceModel>(_itemInteractor.CalculateAveragePrice(prices));
             if (averaged.CurrencyType == primaryCurrency)
             {
                 model.Price = averaged;
                 var oldPrices = prices.Where(x => DateTime.Now.AddDays(-7) > x.DateCreated).ToList();
                 if (oldPrices.Count != 0)
                 {
-                    var averagedOld = CalculateAveragePrice(oldPrices);
-                    model.SevenDaysChange = CalculateChange(averagedOld.Ammount, model.Price.Ammount);
+                    var averagedOld = _itemInteractor.CalculateAveragePrice(oldPrices);
+                    model.SevenDaysChange = _itemInteractor.CalculateChange(averagedOld.Ammount, model.Price.Ammount);
                 }
             }
             else
                 model.OtherCurrencyPrices.Add(averaged);
         }
-
-        private PriceModel CalculateAveragePrice(List<Price> prices)
-        {
-            int divider = 0;
-            double ammount = 0;
-            foreach (Price p in prices)
-            {
-                divider++;
-                ammount += p.Ammount;
-            }
-            PriceModel result = new PriceModel
-            {
-                CurrencyType = prices.First().CurrencyType,
-                Ammount = Math.Round(ammount / divider)
-            };
-            return result;
-        }
-
-        private double CalculateChange(double previous, double current)
-        {
-            var result = (current - previous) / Math.Abs(previous);
-            return result;
-        }
+       
     }
 }
 

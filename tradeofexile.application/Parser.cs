@@ -35,6 +35,7 @@ namespace tradeofexile.infrastructure
             item.Extended = new Extended();
             item.Extended.BaseType = responseItem.Extended.BaseType;
             item.Extended.Category = ParseStringCategoryToObjectCategory(responseItem.Extended.Category);
+                
             item.IconLink = responseItem.IconLink;
             if (responseItem.Price != null)
                 item.Price = ParseStringPriceToObjectPrice(responseItem.Price);
@@ -70,6 +71,7 @@ namespace tradeofexile.infrastructure
             }
             return null;
         }
+        
         private double ParseStringToDouble(string value)
         {
             double number = new double();

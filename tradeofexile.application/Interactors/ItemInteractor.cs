@@ -1,29 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Contracts.Persistence;
-using tradeofexile.infrastructure;
 using tradeofexile.models.EntityItems;
-using Microsoft.EntityFrameworkCore;
 
 namespace tradeofexile.application.Interactors
 {
     public class ItemInteractor : IItemInteractor
     {
         private readonly IBaseRepository<Item> _itemRepository;
-        private readonly IBaseRepository<Price> _priceRepository;
         private readonly IBaseRepository<UniqueNameEntry> _namesRepository;
-        private readonly IPricer _pricer;
-        private readonly IGamepediaResponseHandler _gamepediaResponseHandler;
-        public ItemInteractor(IBaseRepository<Item> itemRepository, IBaseRepository<Price> priceRepository, IPricer pricer, IGamepediaResponseHandler gamepediaResponseHandler, IBaseRepository<UniqueNameEntry> namesRepository)
+        public ItemInteractor(IBaseRepository<Item> itemRepository, IBaseRepository<Price> priceRepository, IBaseRepository<UniqueNameEntry> namesRepository)
         {
             _itemRepository = itemRepository;
-            _priceRepository = priceRepository;
-            _pricer = pricer;
-            _gamepediaResponseHandler = gamepediaResponseHandler;
             _namesRepository = namesRepository;
         }
         public List<Item> GetPricedUniquesByItemCategory(ItemCategory itemCategory)
@@ -36,6 +26,28 @@ namespace tradeofexile.application.Interactors
             }
             var items = _itemRepository.GetAll(x => x.Price, y => names.Contains(y.Name)).ToList();
             return items;
+        }
+        public Price CalculateAveragePrice(List<Price> prices)
+        {
+            int divider = 0;
+            double ammount = 0;
+            foreach (Price p in prices)
+            {
+                divider++;
+                ammount += p.Ammount;
+            }
+            Price result = new Price
+            {
+                CurrencyType = prices.First().CurrencyType,
+                Ammount = Math.Round(ammount / divider)
+            };
+            return result;
+        }
+
+        public double CalculateChange(double previous, double current)
+        {
+            var result = (current - previous) / Math.Abs(previous);
+            return result;
         }
     }
 }
