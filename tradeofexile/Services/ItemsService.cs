@@ -103,10 +103,11 @@ namespace tradeofexile.Services
                 divider++;
                 ammount += p.Ammount;
             }
-            PriceModel result = new PriceModel();
-            result.CurrencyType = prices.First().CurrencyType;
-            result.Ammount = ammount / divider;
-
+            PriceModel result = new PriceModel
+            {
+                CurrencyType = prices.First().CurrencyType,
+                Ammount = Math.Round(ammount / divider)
+            };
             return result;
         }
 

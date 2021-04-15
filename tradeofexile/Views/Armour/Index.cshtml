@@ -1,0 +1,4 @@
+﻿@model tradeofexile.Models.ItemsViewModel
+
+<partial name="_ItemOverview">
+@Html.ActionLink("Load more", "Index", "Armour", new { page = Model.PagingInfo.CurrentPage + 1 });

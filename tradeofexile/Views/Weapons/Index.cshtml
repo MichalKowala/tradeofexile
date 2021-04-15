@@ -1,31 +1,4 @@
-﻿@model List<tradeofexile.Models.ItemModel>
+﻿@model tradeofexile.Models.ItemsViewModel
 
-
-<table class="item-overview">
-    <thead class="">
-        <tr>
-            <th>
-
-            </th>
-            <th class="">
-                Name
-            </th>
-            <th>
-            </th>
-            <th class="th-value">
-                Value
-            </th>
-        </tr>
-    </thead>
-    <tbody class="item-overview-tbody">
-        @foreach (var item in Model)
-        {
-            <tr class="item-tr">
-                <td class="item-icon"><img class="item-img" src="@item.IconLink." /></td>
-                <td class="item-name">@item.Name</td>
-                <td class="item-price-ammount">@item.Price.Ammount</td>
-                <td class="item-price-type"> @item.Price.CurrencyType</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<partial name="_ItemOverview">
+@Html.ActionLink("Load more", "Index", "Weapons", new { page=Model.PagingInfo.CurrentPage+1});

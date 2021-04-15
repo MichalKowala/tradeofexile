@@ -7,25 +7,25 @@ using tradeofexile.Models;
 
 namespace tradeofexile.Controllers
 {
-    public class WeaponsController : Controller
+    public class FlasksController : Controller
     {
         private readonly IItemsService _itemModelService;
-        public WeaponsController(IItemsService itemModelService)
+        public FlasksController(IItemsService itemModelService)
         {
             _itemModelService = itemModelService;
         }
-        public IActionResult Index(int page=1)
+        public IActionResult Index(int page = 1)
         {
             int selectedLeague;
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
-            var weaponsVM = new ItemsViewModel();
-            weaponsVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
+            var flasksVM = new ItemsViewModel();
+            flasksVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
             var items = _itemModelService
-                .GetCachedItems(nameof(CacheKeys.Weapons), (LeagueType)selectedLeague, ItemCategory.Weapons)
-                .Take(weaponsVM.PagingInfo.CurrentPage*weaponsVM.PagingInfo.ItemsPerPage)
+                .GetCachedItems(nameof(CacheKeys.Flasks), (LeagueType)selectedLeague, ItemCategory.Flasks)
+                .Take(flasksVM.PagingInfo.CurrentPage * flasksVM.PagingInfo.ItemsPerPage)
                 .ToList();
-            weaponsVM.ItemsToShow = items;
-            return View(weaponsVM);
+            flasksVM.ItemsToShow = items;
+            return View(flasksVM);
         }
     }
 }

@@ -16,10 +16,9 @@ namespace tradeofexile.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMemoryCache _cache;
-        public HomeController(IMemoryCache cache)
+        public HomeController()
         {
-            _cache = cache;
+            
         }
         public IActionResult Index()
         {

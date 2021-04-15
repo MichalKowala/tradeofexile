@@ -34,7 +34,7 @@ namespace tradeofexile.infrastructure
         public void GetAndProcessPoeApiResponse()
         {
                 PoeApiResponse response = GetResponseFromPoeApi();
-                if (response!=null)
+                if (response.Stashes!=null)
                 ProcessResponse(response);
         }
         private void ProcessResponse(PoeApiResponse response)

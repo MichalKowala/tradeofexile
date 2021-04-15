@@ -7,25 +7,25 @@ using tradeofexile.Models;
 
 namespace tradeofexile.Controllers
 {
-    public class WeaponsController : Controller
+    public class ArmourController : Controller
     {
         private readonly IItemsService _itemModelService;
-        public WeaponsController(IItemsService itemModelService)
+        public ArmourController(IItemsService itemModelService)
         {
             _itemModelService = itemModelService;
         }
-        public IActionResult Index(int page=1)
+        public IActionResult Index(int page = 1)
         {
             int selectedLeague;
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
-            var weaponsVM = new ItemsViewModel();
-            weaponsVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
+            var armourVM = new ItemsViewModel();
+            armourVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
             var items = _itemModelService
-                .GetCachedItems(nameof(CacheKeys.Weapons), (LeagueType)selectedLeague, ItemCategory.Weapons)
-                .Take(weaponsVM.PagingInfo.CurrentPage*weaponsVM.PagingInfo.ItemsPerPage)
+                .GetCachedItems(nameof(CacheKeys.Armour), (LeagueType)selectedLeague, ItemCategory.Armour)
+                .Take(armourVM.PagingInfo.CurrentPage * armourVM.PagingInfo.ItemsPerPage)
                 .ToList();
-            weaponsVM.ItemsToShow = items;
-            return View(weaponsVM);
+            armourVM.ItemsToShow = items;
+            return View(armourVM);
         }
     }
 }
