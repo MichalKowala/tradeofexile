@@ -18,8 +18,10 @@ namespace tradeofexile.application.Contracts.Persistence
         T GetById(Guid id);
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Func<T, bool> predicate);
-        IQueryable<T> GetAll<TInclude>(Expression<Func<T, TInclude>> include, Func<T, bool> predicate);
         bool Exists(Func<T, bool> predicate);
         T GetRecentlyCreated();
+        public IQueryable<T> GetAllWithChildrenAndFilter(Func<T,bool>predicate, params Expression<Func<T, object>>[] childrens);
+        public IQueryable<T> GetAllWithChildren(params Expression<Func<T, object>>[] childrens);
+
     }
 }

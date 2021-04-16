@@ -11,6 +11,7 @@ namespace tradeofexile.application.Utilities
         public static string Maps => "_Maps";
         public static string Flasks => "_Flasks";
         public static string Jewels => "_Jewels";
+        public static string DeliriumOrbs => "_DeliriumOrbs";
 
     }
 }

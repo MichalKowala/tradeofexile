@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.models.EntityItems;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Collections.Generic;
 
 namespace tradeofexile.persistance.Repositories
 {
@@ -44,11 +43,8 @@ namespace tradeofexile.persistance.Repositories
             return _dbContext.Set<T>().Where(predicate).AsQueryable();
         }
      
-        public IQueryable<T> GetAll<TInclude>(Expression<Func<T,TInclude>> include, Func<T,bool> predicate)
-        {
-            return _dbContext.Set<T>().Include(include).Where(predicate).AsQueryable();
-        }
-
+     
+        
         public bool Exists(Func<T, bool> predicate)
         {
             return _dbContext.Set<T>().Any(predicate);
@@ -75,5 +71,19 @@ namespace tradeofexile.persistance.Repositories
             var record = _dbContext.Set<T>().OrderByDescending(x => x.DateCreated).FirstOrDefault();
             return record;
         }
+        public IQueryable<T> GetAllWithChildren(params Expression<Func<T, object>>[] childrens)
+        {
+            var result = _dbContext.Set<T>();
+            childrens.ToList().ForEach(x => result.Include(x).Load());
+            return result.AsQueryable();
+        }
+        public IQueryable<T> GetAllWithChildrenAndFilter(Func<T,bool> predicate, params Expression<Func<T, object>>[] childrens)
+        {
+            var result = _dbContext.Set<T>();
+            childrens.ToList().ForEach(x => result.Include(x).Load());
+            return result.Where(predicate).AsQueryable();
+        }
+
+       
     }
 }

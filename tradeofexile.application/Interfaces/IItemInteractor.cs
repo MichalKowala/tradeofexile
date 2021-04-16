@@ -9,5 +9,6 @@ namespace tradeofexile.application.Abstraction
     public interface IItemInteractor
     {
         public List<ItemDTO> GetUniquesToCache(ItemCategory itemCategory);
+        public List<ItemDTO> GetDeliriumOrbsToCache();
     }
 }

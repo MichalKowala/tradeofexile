@@ -23,6 +23,18 @@ namespace tradeofexile.application.Interactors
         public List<ItemDTO> GetUniquesToCache(ItemCategory category)
         {
             var unprocessed = GetUniquesByItemCategory(category);
+            return Process(unprocessed);
+        }
+        public List<ItemDTO> GetDeliriumOrbsToCache()
+        {
+            var unprocezzzed = _itemRepository.GetAllWithChildrenAndFilter(x=>x.Extended.BaseType.Contains("Delirium Orb"), x => x.Price, y => y.Extended).ToList();
+            foreach (var i in unprocezzzed)
+                i.Name = i.Extended.BaseType;
+            var p=_mapper.Map<List<Item>,List< ItemDTO >> (unprocezzzed);
+            return Process(p);
+        }
+        private List<ItemDTO> Process(List<ItemDTO> unprocessed)
+        {
             var leagueGroupings = unprocessed.GroupBy(x => x.League);
             List<ItemDTO> cacheValue = new List<ItemDTO>();
             foreach (var lG in leagueGroupings)
@@ -43,7 +55,7 @@ namespace tradeofexile.application.Interactors
             {
                 names.Add(entry.Name);
             }
-            var items = _itemRepository.GetAll(x => x.Price, y => names.Contains(y.Name)).ToList();
+            var items = _itemRepository.GetAllWithChildrenAndFilter(y => names.Contains(y.Name), x => x.Price).ToList();
             var mappedItems = _mapper.Map<List<Item>, List<ItemDTO>>(items);
             return mappedItems;
         }
@@ -102,7 +114,7 @@ namespace tradeofexile.application.Interactors
         private double CalculateChange(double previous, double current)
         {
             var result = (current - previous) / Math.Abs(previous);
-            return result;
+            return Math.Round(result);
         }
     }
 }

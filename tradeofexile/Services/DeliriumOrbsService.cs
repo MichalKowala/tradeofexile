@@ -9,33 +9,33 @@ using tradeofexile.models.EntityItems;
 
 namespace tradeofexile.Services
 {
-    public class UniquesService : IUniquesService
+    public class DeliriumOrbsService : IDeliriumOrbsService
     {
         private readonly IItemInteractor _itemInteractor;
         private readonly ICacheProvider _cacheProvider;
-        public UniquesService(IItemInteractor itemInteractor, ICacheProvider cacheProvider, IMapper mapper)
+        public DeliriumOrbsService(IItemInteractor itemInteractor, ICacheProvider cacheProvider, IMapper mapper)
         {
             _itemInteractor = itemInteractor;
             _cacheProvider = cacheProvider;
         }
 
-        public List<ItemDTO> GetCachedUniques(string cacheKey, LeagueType league, ItemCategory category)
+        public List<ItemDTO> GetCachedDeliriumOrbs(string cacheKey, LeagueType league)
         {
             var result = _cacheProvider.GetFromCache<List<ItemDTO>>(cacheKey);
             if (result != null)
                 return result.Where(x => x.League == league).ToList();
             else
             {
-                CacheUniques(cacheKey, category);
+                CacheDeliriumOrbs(cacheKey);
                 result = _cacheProvider.GetFromCache<List<ItemDTO>>(cacheKey);
                 return result.Where(x => x.League == league).ToList();
             }
         }
 
 
-        public void CacheUniques(string cacheKey, ItemCategory category)
+        public void CacheDeliriumOrbs(string cacheKey)
         {
-            var itemsToCache = _itemInteractor.GetUniquesToCache(category);
+            var itemsToCache = _itemInteractor.GetDeliriumOrbsToCache();
             _cacheProvider.SetCache<List<ItemDTO>>(cacheKey, itemsToCache);
         }
     }
