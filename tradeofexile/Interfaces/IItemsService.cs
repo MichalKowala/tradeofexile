@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using tradeofexile.application.DTOs;
 using tradeofexile.models.EntityItems;
 using tradeofexile.Models;
 
 namespace tradeofexile.Interfaces
 {
-    public interface IItemsService
+    public interface IUniquesService
     {
-        public List<ItemModel> GetCachedItems(string cacheKey, LeagueType leagueType, ItemCategory itemCategory);
-        public void CacheItems(string cacheKey, ItemCategory category);
+        public List<ItemDTO> GetCachedUniques(string cacheKey, LeagueType leagueType, ItemCategory itemCategory);
+        public void CacheUniques(string cacheKey, ItemCategory category);
     }
 }

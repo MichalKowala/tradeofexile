@@ -35,7 +35,7 @@ namespace tradeofexile
             services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnectionString"), new MySqlStorageOptions())));
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
-            services.AddTransient<IItemsService, ItemsService>();
+            services.AddTransient<IUniquesService, UniquesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

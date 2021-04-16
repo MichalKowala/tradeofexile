@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using tradeofexile.application.Abstraction;
-using tradeofexile.application.Contracts.Persistence;
 using tradeofexile.application.Interactors;
 using tradeofexile.application.Interfaces;
 using tradeofexile.infrastructure;
@@ -25,6 +22,7 @@ namespace tradeofexile.application
             services.AddTransient<IPoeApiIResponseHandler, PoeApiResponseHandler>();
             services.AddTransient<IFilter, Filter>();
             services.AddTransient<ICacheProvider, CacheProvider>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
     }

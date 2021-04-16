@@ -9,10 +9,10 @@ namespace tradeofexile.Controllers
 {
     public class FlasksController : Controller
     {
-        private readonly IItemsService _itemModelService;
-        public FlasksController(IItemsService itemModelService)
+        private readonly IUniquesService _uniquesService;
+        public FlasksController(IUniquesService uniquesService)
         {
-            _itemModelService = itemModelService;
+            _uniquesService = uniquesService;
         }
         public IActionResult Index(int page = 1)
         {
@@ -20,8 +20,8 @@ namespace tradeofexile.Controllers
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
             var flasksVM = new ItemsViewModel();
             flasksVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
-            var items = _itemModelService
-                .GetCachedItems(nameof(CacheKeys.Flasks), (LeagueType)selectedLeague, ItemCategory.Flasks)
+            var items = _uniquesService
+                .GetCachedUniques(nameof(CacheKeys.Flasks), (LeagueType)selectedLeague, ItemCategory.Flasks)
                 .Take(flasksVM.PagingInfo.CurrentPage * flasksVM.PagingInfo.ItemsPerPage)
                 .ToList();
             flasksVM.ItemsToShow = items;

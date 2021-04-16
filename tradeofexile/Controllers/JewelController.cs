@@ -9,10 +9,10 @@ namespace tradeofexile.Controllers
 {
     public class JewelController : Controller
     {
-        private readonly IItemsService _itemModelService;
-        public JewelController(IItemsService itemModelService)
+        private readonly IUniquesService _uniquesService;
+        public JewelController(IUniquesService uniquesService)
         {
-            _itemModelService = itemModelService;
+            _uniquesService = uniquesService;
         }
         public IActionResult Index(int page = 1)
         {
@@ -20,8 +20,8 @@ namespace tradeofexile.Controllers
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
             var jewelVM = new ItemsViewModel();
             jewelVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
-            var items = _itemModelService
-                .GetCachedItems(nameof(CacheKeys.Jewels), (LeagueType)selectedLeague, ItemCategory.Jewels)
+            var items = _uniquesService
+                .GetCachedUniques(nameof(CacheKeys.Jewels), (LeagueType)selectedLeague, ItemCategory.Jewels)
                 .Take(jewelVM.PagingInfo.CurrentPage * jewelVM.PagingInfo.ItemsPerPage)
                 .ToList();
             jewelVM.ItemsToShow = items;

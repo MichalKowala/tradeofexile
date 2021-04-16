@@ -9,10 +9,10 @@ namespace tradeofexile.Controllers
 {
     public class WeaponsController : Controller
     {
-        private readonly IItemsService _itemModelService;
-        public WeaponsController(IItemsService itemModelService)
+        private readonly IUniquesService _uniquesService;
+        public WeaponsController(IUniquesService uniquesService)
         {
-            _itemModelService = itemModelService;
+            _uniquesService = uniquesService;
         }
         public IActionResult Index(int page=1)
         {
@@ -20,8 +20,8 @@ namespace tradeofexile.Controllers
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
             var weaponsVM = new ItemsViewModel();
             weaponsVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
-            var items = _itemModelService
-                .GetCachedItems(nameof(CacheKeys.Weapons), (LeagueType)selectedLeague, ItemCategory.Weapons)
+            var items = _uniquesService
+                .GetCachedUniques(nameof(CacheKeys.Weapons), (LeagueType)selectedLeague, ItemCategory.Weapons)
                 .Take(weaponsVM.PagingInfo.CurrentPage*weaponsVM.PagingInfo.ItemsPerPage)
                 .ToList();
             weaponsVM.ItemsToShow = items;

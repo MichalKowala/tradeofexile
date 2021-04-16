@@ -9,10 +9,10 @@ namespace tradeofexile.Controllers
 {
     public class MapsController : Controller
     {
-        private readonly IItemsService _itemModelService;
-        public MapsController(IItemsService itemModelService)
+        private readonly IUniquesService _uniquesService;
+        public MapsController(IUniquesService uniquesService)
         {
-            _itemModelService = itemModelService;
+            _uniquesService = uniquesService;
         }
         public IActionResult Index(int page = 1)
         {
@@ -20,8 +20,8 @@ namespace tradeofexile.Controllers
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
             var mapsVM = new ItemsViewModel();
             mapsVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
-            var items = _itemModelService
-                .GetCachedItems(nameof(CacheKeys.Maps), (LeagueType)selectedLeague, ItemCategory.Maps)
+            var items = _uniquesService
+                .GetCachedUniques(nameof(CacheKeys.Maps), (LeagueType)selectedLeague, ItemCategory.Maps)
                 .Take(mapsVM.PagingInfo.CurrentPage * mapsVM.PagingInfo.ItemsPerPage)
                 .ToList();
             mapsVM.ItemsToShow = items;

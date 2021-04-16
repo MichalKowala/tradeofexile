@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using tradeofexile.application.DTOs;
 
 namespace tradeofexile.Models
 {
     public class ItemsViewModel
     {
-        public List<ItemModel> ItemsToShow { get; set; }
+        public List<ItemDTO> ItemsToShow { get; set; }
         public PagingInfo PagingInfo { get; set; }
         
     }

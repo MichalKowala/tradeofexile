@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using tradeofexile.models.EntityItems;
 
-namespace tradeofexile.Models
+namespace tradeofexile.application.DTOs
 {
-    public class PriceModel
+    public class PriceDTO : BaseDTO
     {
         public double Ammount { get; set; }
         public CurrencyType CurrencyType { get; set; }

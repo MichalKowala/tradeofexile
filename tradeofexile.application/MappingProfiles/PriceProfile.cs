@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using tradeofexile.application.DTOs;
 using tradeofexile.models.EntityItems;
-using tradeofexile.Models;
 
 namespace tradeofexile.MappingProfiles
 {
@@ -12,7 +8,7 @@ namespace tradeofexile.MappingProfiles
     {
         public PriceProfile()
         {
-            CreateMap<Price, PriceModel>();
+            CreateMap<Price, PriceDTO>();
         }
     }
 }
