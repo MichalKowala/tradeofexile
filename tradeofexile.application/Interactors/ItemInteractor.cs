@@ -19,6 +19,7 @@ namespace tradeofexile.application.Interactors
             _itemRepository = itemRepository;
             _namesRepository = namesRepository;
             _mapper = mapper;
+            
         }
         public List<ItemDTO> GetUniquesToCache(ItemCategory category)
         {
@@ -27,11 +28,11 @@ namespace tradeofexile.application.Interactors
         }
         public List<ItemDTO> GetDeliriumOrbsToCache()
         {
-            var unprocezzzed = _itemRepository.GetAllWithChildrenAndFilter(x=>x.Extended.BaseType.Contains("Delirium Orb"), x => x.Price, y => y.Extended).ToList();
-            foreach (var i in unprocezzzed)
-                i.Name = i.Extended.BaseType;
-            var p=_mapper.Map<List<Item>,List< ItemDTO >> (unprocezzzed);
-            return Process(p);
+            var unprocessed = _itemRepository.GetAllWithChildrenAndFilter(x=>x.Extended.BaseType.Contains("Delirium Orb"), x => x.Price, y => y.Extended).ToList();
+            foreach (var orb in unprocessed)
+                orb.Name = orb.Extended.BaseType;
+            var mapped=_mapper.Map<List<Item>,List< ItemDTO >> (unprocessed);
+            return Process(mapped);
         }
         private List<ItemDTO> Process(List<ItemDTO> unprocessed)
         {

@@ -22,6 +22,7 @@ namespace tradeofexile.application
             services.AddTransient<IPoeApiIResponseHandler, PoeApiResponseHandler>();
             services.AddTransient<IFilter, Filter>();
             services.AddTransient<ICacheProvider, CacheProvider>();
+            services.AddTransient<IExchangeOffersInteractor, ExchangeOffersInteractor>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
