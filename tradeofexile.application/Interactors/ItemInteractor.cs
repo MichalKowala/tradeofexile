@@ -82,6 +82,7 @@ namespace tradeofexile.application.Interactors
         private void CalculatePriceRelatedProperties(ItemDTO model, CurrencyType primaryCurrency, List<PriceDTO> prices)
         {
             var averaged = CalculateAveragePrice(prices);
+            averaged.IconLink = ParsingTable.enumCurrencyToIconUri[averaged.CurrencyType];
             if (averaged.CurrencyType == primaryCurrency)
             {
                 model.Price = averaged;

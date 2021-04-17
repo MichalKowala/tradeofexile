@@ -9,5 +9,6 @@ namespace tradeofexile.application.DTOs
     {
         public double Ammount { get; set; }
         public CurrencyType CurrencyType { get; set; }
+        public Uri IconLink { get; set; }
     }
 }

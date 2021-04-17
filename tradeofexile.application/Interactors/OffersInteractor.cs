@@ -26,6 +26,8 @@ namespace tradeofexile.application.Interactors
             {
                 ExchangeOfferDTO offer = new ExchangeOfferDTO();
                 offer.CurrencyType=(CurrencyType)i;
+                offer.IconLink = ParsingTable.enumCurrencyToIconUri[offer.CurrencyType];
+               // offer.IconLink = ParsingTable.enumCurrencyToIconUri[offer.CurrencyType];
 
                 var buyOffers = unprocessed.Where(x => x.ToCurrency == offer.CurrencyType).ToList();
                 if (buyOffers.Count() != 0)
@@ -40,6 +42,7 @@ namespace tradeofexile.application.Interactors
                     }
                     offer.BuyType = buyMostCommon.Key;
                     offer.BuyRate = buyRateCombined / buyDivider;
+                    offer.BuyIconLink = ParsingTable.enumCurrencyToIconUri[offer.BuyType];
                 }
 
                 var sellOffers = unprocessed.Where(x => x.FromCurrency == offer.CurrencyType).ToList();
@@ -55,6 +58,7 @@ namespace tradeofexile.application.Interactors
                     }
                     offer.SellType = sellMostCommon.Key;
                     offer.SellRate = sellRateCombinder / sellDivider;
+                    offer.SellIconLink = ParsingTable.enumCurrencyToIconUri[offer.SellType];
                 }
                 offers.Add(offer);
             }
