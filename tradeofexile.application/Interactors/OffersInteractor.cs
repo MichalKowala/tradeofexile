@@ -44,7 +44,7 @@ namespace tradeofexile.application.Interactors
                             buyRateCombined += buyOffer.Rate;
                         }
                         offer.BuyType = buyMostCommon.Key;
-                        offer.BuyRate = buyRateCombined / buyDivider;
+                        offer.BuyRate = Math.Round(buyRateCombined / buyDivider);
                         offer.BuyIconLink = ParsingTable.enumCurrencyToIconUri[offer.BuyType];
                     }
                     
@@ -60,7 +60,7 @@ namespace tradeofexile.application.Interactors
                             sellRateCombinder += sellOffer.Rate;
                         }
                         offer.SellType = sellMostCommon.Key;
-                        offer.SellRate = sellRateCombinder / sellDivider;
+                        offer.SellRate = Math.Round(sellRateCombinder / sellDivider);
                         offer.SellIconLink = ParsingTable.enumCurrencyToIconUri[offer.SellType];
                     }
                     offers.Add(offer);

@@ -49,9 +49,9 @@ namespace tradeofexile.application
         };
         public static readonly Dictionary<string, LeagueType> stringToEnumLeague = new Dictionary<string, LeagueType>()
         {
-            {"Ritual",LeagueType.Ritual },
+            {"Ultimatum",LeagueType.Ultimatum },
             {"Standard",LeagueType.Standard },
-            {"Hardcore Ritual",LeagueType.HardcoreRitual },
+            {"Hardcore Ultimatum",LeagueType.HardcoreUltimatum },
             {"Hardcore", LeagueType.Hardcore }
         };
 

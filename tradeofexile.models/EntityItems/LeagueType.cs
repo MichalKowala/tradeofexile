@@ -6,10 +6,11 @@ namespace tradeofexile.models.EntityItems
 {
     public enum LeagueType
     {
-        Ritual,
-        HardcoreRitual,
         Standard,
-        Other,
-        Hardcore
+        Hardcore,
+        HardcoreUltimatum,
+        Ultimatum,
+        Other
+        
     }
 }

@@ -71,7 +71,7 @@ namespace tradeofexile.infrastructure
         public  List<string> GetListOfCurrencyItems()
         {
             List<string> listOfItems = new List<string>();
-            string poeWatchCallUrl = "https://api.poe.watch/get?category=currency&league=Ritual";
+            string poeWatchCallUrl = "https://api.poe.watch/get?category=currency&league=Ultimatum";
             string response = _apiHelper.GetResponseFromApi(poeWatchCallUrl);
             JArray jArray = JArray.Parse(response);
             foreach (JToken t in jArray)
