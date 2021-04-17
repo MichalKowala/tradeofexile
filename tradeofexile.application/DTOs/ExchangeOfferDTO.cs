@@ -15,6 +15,7 @@ namespace tradeofexile.application.DTOs
         public CurrencyType SellType { get; set; }
         public double SellRate { get; set; }
         public Uri SellIconLink { get; set; } 
+        public LeagueType League { get; set; }
 
     }
 }

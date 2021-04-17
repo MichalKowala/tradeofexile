@@ -66,7 +66,7 @@ namespace tradeofexile.infrastructure
                 {
                     if (ParsingTable.stringToEnumCurrency.ContainsKey(i.Extended.BaseType))
                     {
-                        _pricer.AddOffer(ParsingTable.stringToEnumCurrency[i.Extended.BaseType], i.Price);
+                        _pricer.AddOffer(ParsingTable.stringToEnumCurrency[i.Extended.BaseType], i.Price, i.League);
                     }
                     else
                         _itemRepository.Create(i);

@@ -12,6 +12,7 @@ namespace tradeofexile.application.Utilities
         public static string Flasks => "_Flasks";
         public static string Jewels => "_Jewels";
         public static string DeliriumOrbs => "_DeliriumOrbs";
+        public static string Currencies => "_Currencies";
 
     }
 }

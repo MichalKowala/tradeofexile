@@ -10,5 +10,6 @@ namespace tradeofexile.models.EntityItems
         public CurrencyType FromCurrency { get; set; }
         public CurrencyType ToCurrency { get; set; }
         public double Rate { get; set; }
+        public LeagueType League { get; set; }
     }
 }

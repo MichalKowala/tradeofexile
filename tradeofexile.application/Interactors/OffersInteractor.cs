@@ -19,49 +19,54 @@ namespace tradeofexile.application.Interactors
 
         public List<ExchangeOfferDTO> GetOffersToCache()
         {
-            var unprocessed = _currencyRepository.GetAll();
-            var currenciesCount = Enum.GetNames(typeof(CurrencyType)).Length;
+            var unprocessed = _currencyRepository.GetAll().ToList();
             List<ExchangeOfferDTO> offers = new List<ExchangeOfferDTO>();
-            for (int i = 0; i < currenciesCount; i++)
+            var unprocessedLeagueGroupings = unprocessed.GroupBy(x => x.League).ToList();
+            foreach (var grouping in unprocessedLeagueGroupings)
             {
-                ExchangeOfferDTO offer = new ExchangeOfferDTO();
-                offer.CurrencyType=(CurrencyType)i;
-                offer.IconLink = ParsingTable.enumCurrencyToIconUri[offer.CurrencyType];
-               // offer.IconLink = ParsingTable.enumCurrencyToIconUri[offer.CurrencyType];
-
-                var buyOffers = unprocessed.Where(x => x.ToCurrency == offer.CurrencyType).ToList();
-                if (buyOffers.Count() != 0)
+                var currenciesCount = Enum.GetNames(typeof(CurrencyType)).Length;
+                for (int i = 0; i < currenciesCount; i++)
                 {
-                    var buyMostCommon = buyOffers.GroupBy(x => x.FromCurrency).OrderByDescending(x => x.Count()).First();
-                    int buyDivider = 0;
-                    double buyRateCombined = 0;
-                    foreach (var buyOffer in buyMostCommon)
+                    ExchangeOfferDTO offer = new ExchangeOfferDTO();
+                    offer.League = grouping.Key;
+                    offer.CurrencyType = (CurrencyType)i;
+                    offer.IconLink = ParsingTable.enumCurrencyToIconUri[offer.CurrencyType];
+                    
+                    var buyOffers = grouping.Where(x => x.ToCurrency == offer.CurrencyType).ToList();
+                    if (buyOffers.Count() != 0)
                     {
-                        buyDivider++;
-                        buyRateCombined += buyOffer.Rate;
+                        var buyMostCommon = buyOffers.GroupBy(x => x.FromCurrency).OrderByDescending(x => x.Count()).First();
+                        int buyDivider = 0;
+                        double buyRateCombined = 0;
+                        foreach (var buyOffer in buyMostCommon)
+                        {
+                            buyDivider++;
+                            buyRateCombined += buyOffer.Rate;
+                        }
+                        offer.BuyType = buyMostCommon.Key;
+                        offer.BuyRate = buyRateCombined / buyDivider;
+                        offer.BuyIconLink = ParsingTable.enumCurrencyToIconUri[offer.BuyType];
                     }
-                    offer.BuyType = buyMostCommon.Key;
-                    offer.BuyRate = buyRateCombined / buyDivider;
-                    offer.BuyIconLink = ParsingTable.enumCurrencyToIconUri[offer.BuyType];
-                }
-
-                var sellOffers = unprocessed.Where(x => x.FromCurrency == offer.CurrencyType).ToList();
-                if(sellOffers.Count()!=0)
-                {
-                    var sellMostCommon = sellOffers.GroupBy(x => x.ToCurrency).OrderByDescending(x => x.Count()).First();
-                    int sellDivider = 0;
-                    double sellRateCombinder = 0;
-                    foreach (var sellOffer in sellMostCommon)
+                    
+                    var sellOffers = grouping.Where(x => x.FromCurrency == offer.CurrencyType).ToList();
+                    if (sellOffers.Count() != 0)
                     {
-                        sellDivider++;
-                        sellRateCombinder += sellOffer.Rate;
+                        var sellMostCommon = sellOffers.GroupBy(x => x.ToCurrency).OrderByDescending(x => x.Count()).First();
+                        int sellDivider = 0;
+                        double sellRateCombinder = 0;
+                        foreach (var sellOffer in sellMostCommon)
+                        {
+                            sellDivider++;
+                            sellRateCombinder += sellOffer.Rate;
+                        }
+                        offer.SellType = sellMostCommon.Key;
+                        offer.SellRate = sellRateCombinder / sellDivider;
+                        offer.SellIconLink = ParsingTable.enumCurrencyToIconUri[offer.SellType];
                     }
-                    offer.SellType = sellMostCommon.Key;
-                    offer.SellRate = sellRateCombinder / sellDivider;
-                    offer.SellIconLink = ParsingTable.enumCurrencyToIconUri[offer.SellType];
+                    offers.Add(offer);
                 }
-                offers.Add(offer);
             }
+
             return offers;
         }
     }

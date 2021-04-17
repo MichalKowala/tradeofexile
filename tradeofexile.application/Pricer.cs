@@ -18,7 +18,7 @@ namespace tradeofexile.infrastructure
             _currencyExchangeOfferRepository = currencyExchangeOffer;
         }
        
-        public void AddOffer(CurrencyType fromCurrency, Price offer)
+        public void AddOffer(CurrencyType fromCurrency, Price offer, LeagueType league)
         {
             CurrencyExchangeOffer offerRecord = new CurrencyExchangeOffer()
             {

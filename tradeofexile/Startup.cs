@@ -37,6 +37,7 @@ namespace tradeofexile
             services.AddControllersWithViews();
             services.AddTransient<IUniquesService, UniquesService>();
             services.AddTransient<IDeliriumOrbsService, DeliriumOrbsService>();
+            services.AddTransient<ICurrenciesService, CurrenciesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
