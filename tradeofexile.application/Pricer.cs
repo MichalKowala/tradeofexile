@@ -24,7 +24,7 @@ namespace tradeofexile.infrastructure
             {
                 FromCurrency = fromCurrency,
                 ToCurrency = offer.CurrencyType,
-                Rate = 1 / offer.Ammount
+                Rate=offer.Ammount
             };
             _currencyExchangeOfferRepository.Create(offerRecord);
         }

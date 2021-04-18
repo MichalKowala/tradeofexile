@@ -1,0 +1,84 @@
+﻿@model tradeofexile.Models.CurrenciesViewModel;
+<body onload="myFunction()">
+    <table class="item-overview">
+        <thead class="">
+            <tr>
+
+                <th>
+
+                </th>
+                <th class="th-name">
+                    Name
+                </th>
+                <th class="th-buy" colspan="3">
+                    Buy
+                </th>
+                <th class="th-sell" colspan="3">
+                    Get
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody class="item-overview-tbody">
+            @foreach (var offer in Model.ExchangeOffers)
+            {
+                <tr class="item-tr">
+                    <td>
+                        <img src="@offer.IconLink" />
+                    </td>
+                    <td>
+                        @offer.CurrencyType.ToString()
+                    </td>
+
+                    <td class="buyRate">
+                        @offer.BuyRate
+                    </td>
+                    <td class="buyIcon">
+                        <img src="@offer.BuyIconLink" />--->
+                    </td>
+                    <td class="buyTargetIcon">
+                        1.0 <img src="@offer.IconLink" />
+                    </td>
+                    <td class="sellIcon">
+                        1.0
+                        <img src="@offer.IconLink" />
+                    </td>
+                    <td class="sellRate">
+                        ---> @offer.SellRate
+                    </td>
+                    <td class="sellTarget">
+                        <img src="@offer.SellIconLink" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="load-more-container">
+        @Html.ActionLink("Load more", "Index", "Currencies", new { page = Model.PagingInfo.CurrentPage + 1 })
+    </div>
+
+    <script>
+        //yes, I know its not elegant
+        function myFunction() {
+            var buyRates = document.getElementsByClassName("buyRate");
+            var buyIcons = document.getElementsByClassName("buyIcon");
+            var buyTargetIcons = document.getElementsByClassName("buyTargetIcon");
+            var sellRates = document.getElementsByClassName("sellRate");
+            var sellIcons = document.getElementsByClassName("sellIcon");
+            var sellTargetIcons = document.getElementsByClassName("sellTargetIcon");
+            for (var i = 0; i < buyRates.length; i++) {
+                if (buyRates[i].innerHTML == 0) {
+                    buyRates[i].innerHTML = null;
+                    buyIcons[i].innerHTML = null;
+                    buyTargetIcons[i].innerHTML = null;
+                }
+                if (sellRates[i].innerHTML == 0) {
+                    sellRates[i].innerHTML = null;
+                    sellIcons[i].innerHTML = null;
+                    sellTargetIcons[i].innerHTML = null;
+                }
+            }
+        }
+    </script>
+</body>

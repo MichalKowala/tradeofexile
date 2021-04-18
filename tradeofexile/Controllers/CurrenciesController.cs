@@ -14,12 +14,15 @@ namespace tradeofexile.Controllers
     public class CurrenciesController : Controller
     {
         private readonly ICurrenciesService _currenciesService;
-        public CurrenciesController(ICurrenciesService currenciesService)
+        private readonly IPoeApiIResponseHandler _blabla;
+        public CurrenciesController(ICurrenciesService currenciesService, IPoeApiIResponseHandler blabla)
         {
+            _blabla = blabla;
             _currenciesService = currenciesService;
         }
         public IActionResult Index(int page = 1)
         {
+
             int selectedLeague;
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
             var currenciesVM = new CurrenciesViewModel();
