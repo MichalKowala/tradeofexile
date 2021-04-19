@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using tradeofexile.application.DTOs;
 using tradeofexile.models.EntityItems;
 
-namespace tradeofexile.Interfaces
+namespace tradeofexile.application.Interfaces
 {
     public interface IDeliriumOrbsService
     {

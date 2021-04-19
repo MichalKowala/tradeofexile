@@ -3,7 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using tradeofexile.application.Abstraction;
 using tradeofexile.application.Interactors;
 using tradeofexile.application.Interfaces;
+using tradeofexile.application.Services;
 using tradeofexile.infrastructure;
+
 
 namespace tradeofexile.application
 {
@@ -23,6 +25,9 @@ namespace tradeofexile.application
             services.AddTransient<IFilter, Filter>();
             services.AddTransient<ICacheProvider, CacheProvider>();
             services.AddTransient<IExchangeOffersInteractor, ExchangeOffersInteractor>();
+            services.AddTransient<IUniquesService, UniquesService>();
+            services.AddTransient<IDeliriumOrbsService, DeliriumOrbsService>();
+            services.AddTransient<ICurrenciesService, CurrenciesService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }

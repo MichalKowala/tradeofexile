@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using tradeofexile.application.DTOs;
 using tradeofexile.application.Interfaces;
-using tradeofexile.Interfaces;
 using tradeofexile.models.EntityItems;
 
-namespace tradeofexile.Services
+namespace tradeofexile.application.Services
 {
     public class CurrenciesService : ICurrenciesService
     {

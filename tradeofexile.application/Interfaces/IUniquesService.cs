@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using tradeofexile.application.DTOs;
 using tradeofexile.models.EntityItems;
-using tradeofexile.Models;
 
-namespace tradeofexile.Interfaces
+namespace tradeofexile.application.Interfaces
 {
     public interface IUniquesService
     {

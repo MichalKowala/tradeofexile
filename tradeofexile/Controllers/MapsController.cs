@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using tradeofexile.application.Utilities;
-using tradeofexile.Interfaces;
 using tradeofexile.models.EntityItems;
 using tradeofexile.Models;
+using tradeofexile.application.Interfaces;
 
 namespace tradeofexile.Controllers
 {

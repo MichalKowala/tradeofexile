@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using tradeofexile.application.Interfaces;
 using tradeofexile.application.Utilities;
-using tradeofexile.Interfaces;
 using tradeofexile.models.EntityItems;
 using tradeofexile.Models;
 
