@@ -4,26 +4,26 @@ using tradeofexile.application.Utilities;
 using tradeofexile.models.EntityItems;
 using tradeofexile.Models;
 using tradeofexile.application.Interfaces;
+using MediatR;
+using System.Threading.Tasks;
+using tradeofexile.application.Queries.GetDeliriumOrbs;
+
 namespace tradeofexile.Controllers
 {
     public class DeliriumOrbsController : Controller
     {
-        private readonly IDeliriumOrbsService _deliriumOrbsService;
-        public DeliriumOrbsController(IDeliriumOrbsService delirumOrbsService)
+        private readonly IMediator _mediator;
+        public DeliriumOrbsController(IMediator mediator)
         {
-            _deliriumOrbsService = delirumOrbsService;
+            _mediator = mediator;
         }
-        public IActionResult Index(int page = 1)
+        public async Task<IActionResult> Index(int page = 1)
         {
             int selectedLeague;
             int.TryParse(HttpContext.Request.Cookies["selectedLeagueId"], out selectedLeague);
             var deliriumOrbsVM = new ItemsViewModel();
             deliriumOrbsVM.PagingInfo = new PagingInfo() { CurrentPage = page, ItemsPerPage = 5 };
-            var items = _deliriumOrbsService
-                .GetCachedDeliriumOrbs(nameof(CacheKeys.DeliriumOrbs), (LeagueType)selectedLeague)
-                .Take(deliriumOrbsVM.PagingInfo.CurrentPage * deliriumOrbsVM.PagingInfo.ItemsPerPage)
-                .ToList();
-            deliriumOrbsVM.ItemsToShow = items;
+            deliriumOrbsVM.ItemsToShow = await _mediator.Send(new GetDeliriumOrbsQuery((LeagueType)selectedLeague, nameof(CacheKeys.DeliriumOrbs)));
             return View(deliriumOrbsVM);
         }
     }

@@ -12,7 +12,7 @@ using tradeofexile.application;
 using tradeofexile.persistance;
 using Hangfire;
 using Hangfire.MySql;
-
+using MediatR;
 
 namespace tradeofexile
 {
@@ -34,6 +34,7 @@ namespace tradeofexile
             services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnectionString"), new MySqlStorageOptions())));
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
+            services.AddMediatR(AppDomain.CurrentDomain.Load("tradeofexile.application"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
