@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    @*<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">tradeofexile</a>
@@ -35,39 +35,28 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header>*@
 
 
 
 
 
-    <div class="container">
+   <div class="main-container">
         <div class="top-bar">
             <partial name="_TopBar" />
         </div>
-        <div class="content">
+        <div class="main">
             <div class="left-menu">
                 <partial name="_LeftMenu" />
             </div>
-            <div class="main">
-                @RenderBody()
+            <div class="content-container">
+                <div class="content">
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - tradeofexile - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

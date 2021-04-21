@@ -1,69 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+
 :root {
-    --primary-color-strong: #067c2d;
-    --primary-color-light: #02d348;
+    --primary-color-strong: #031424;
+    --primary-color-medium: #30415D;
+    --primary-color-light: #8EAE8D;
+    --color-background: #CF6766 ;
+    --border-radius: 11px;
+    --font-primary-color:white;
 }
 
-
-.container {
-
-   
+::placeholder {
+    color: var(--font-primary-color);
 }
 
+body {
+    background-color: var(--color-background);
+    font-family: 'Raleway', sans-serif;
+    font-weight:500;
+    color: var(--font-primary-color);
+}
+a {
+    color: var(--font-primary-color);
+    
+}
+a:hover {
+    color: var(--font-primary-color);
+}
 .content {
-    display: flex;
-    margin-top: 15px;
+    padding: 25px;
+    background-color: var(--primary-color-medium);
+    border-radius: var(--border-radius);
 }
-        
+
+.content-container {
+    width: 100%;
+}
+
+.main-container{
+    margin: 0 15%;
+}
 
 .main {
-    flex: auto;
-    padding: 25px;
+    background-color: var(--primary-color-strong);
+    display: flex;
+    margin-top: 15px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
     
 
-.item-overview{
-    width: 100%;
-}
-.item-overview-tbody{
-    width: auto;    
-}
-.item-tr{
-    height: 60px;
-    border-bottom: 1px solid black;
 
-}
-.item-icon {
-    height: 55px;
-    width: auto;
-    padding: 0;
-    margin: 0;
-    .item-img {
-        max-width: 100%;
-        max-height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
-}
-.item-name{
-    text-align: left;
-}
 
 
 
 //left menu
 .left-menu {
-    width: 255px;
-    background: yellow;
+    min-width: 255px;
 }
-
-// -item overview table- (partial)
-.categories-list{
+.categories-list {
     list-style: none;
     width: 100%;
     align-items: start;
     padding: 25px 0;
     margin: 0;
+}
+// -item overview table- (partial)
+
+.item-overview{
+    width: 100%;
 }
 
 li{
@@ -87,6 +91,9 @@ li{
     max-width: 100%;
 }
 
+.item-occurances{
+    text-align: center;
+}
 .item-price-ammount{
     text-align: right;
     padding-right: 10px;
@@ -100,17 +107,73 @@ li{
 .th-seven-days-change{
     text-align:center;
 }
-
-//currencies
-.buyRate{
-    text-align: right;
-    padding-right: 10px;
+.th-occurances{
+    text-align:center;
 }
+
+.item-overview {
+    width: 100%;
+}
+
+.item-overview-tbody {
+    width: auto;
+}
+
+.item-tr {
+    height: 60px;
+    border-bottom: 1px solid var(--primary-color-light);
+}
+
+.item-icon {
+    height: 55px;
+    width: auto;
+    padding: 0;
+    margin: 0;
+
+    .item-img {
+        max-width: 100%;
+        max-height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
+
+.item-name {
+    text-align: left;
+}
+
+//currencies view
+
 .th-buy{
     text-align: center;
 }
 .th-sell {
     text-align: center;
+}
+.buy-from-rate {
+    text-align: right;
+    padding-right: 5px;
+    border-left: 1px solid var(--primary-color-light);;
+}
+.buy-leads-to{
+    text-align: center;
+}
+
+.buy-target-icon {
+    text-align: left;
+    border-right: 1px solid var(--primary-color-light);
+}
+.sell-from-rate{
+    padding-left: 15px;
+    text-align:right;
+}
+.sell-leads-to{
+    text-align:center;
+}
+.sell-to-rate{
+    text-align:right;
+    padding-right: 5px;
 }
 //top bar
 
@@ -128,6 +191,12 @@ li{
 .item-searchbox {
     width: 100%;
     height: 100%;
+    background-color: var(--primary-color-strong);
+    border-radius: var(--border-radius);
+    border: 0;
+    opacity: 0.8;
+    color:white;
+    padding-left: 10px;
 }
 
 .league-selector-container{
@@ -139,16 +208,25 @@ li{
     padding-right: 12px;
 }
 
-.league-selector-form{
+.league-selector-form {
     width: 350px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
 
 .league-selector {
     width: 100%;
     height: 100%;
+    background-color: var(--primary-color-strong);
+    opacity: 0.8;
+    color: var(--font-primary-color);
+    padding-left: 10px;
 }
+
+//other
 
 .load-more-container{
     text-align: center;
+    margin-top: 20px;
 }
 

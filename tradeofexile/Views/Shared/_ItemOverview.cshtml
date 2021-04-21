@@ -1,36 +1,59 @@
-﻿<table class="item-overview">
-    <thead class="">
-        <tr>
-            <th>
+﻿<body onload="enhance7DaysChangePresentation()">
+    <table class="item-overview">
+        <thead class="">
+            <tr>
+                <th>
 
-            </th>
-            <th class="th-name">
-                Name
-            </th>
-            <th>
-            </th>
-            <th class="th-value">
-                Value
-            </th>
-            <th class="th-seven-days-change">
-                7 days change
-            </th>
-            <th class="th-occurances">
-                Occurances
-            </th>
-        </tr>
-    </thead>
-    <tbody class="item-overview-tbody">
-        @foreach (var item in Model.ItemsToShow)
-        {
-            <tr class="item-tr">
-                <td class="item-icon"><img class="item-img" src="@item.IconLink." /></td>
-                <td class="item-name">@item.Name</td>
-                <td class="item-price-ammount">@item.Price.Ammount</td>
-                <td class="item-price-type"><img class="price-img" src="@item.Price.IconLink" /></td>
-                <td class="item-seven-days-change">@item.SevenDaysChange</td>
-                <td class="item-occurances">@item.Occurances</td>
+                </th>
+                <th class="th-name">
+                    Name
+                </th>
+                <th>
+                </th>
+                <th class="th-value">
+                    Value
+                </th>
+                <th class="th-seven-days-change">
+                    7 days change
+                </th>
+                <th class="th-occurances">
+                    Occurances
+                </th>
             </tr>
+        </thead>
+        <tbody class="item-overview-tbody">
+            @foreach (var item in Model.ItemsToShow)
+            {
+                <tr class="item-tr">
+                    <td class="item-icon"><img class="item-img" src="@item.IconLink." /></td>
+                    <td class="item-name">@item.Name</td>
+                    <td class="item-price-ammount">@item.Price.Ammount</td>
+                    <td class="item-price-type"><img class="price-img" src="@item.Price.IconLink" /></td>
+                    <td class="item-seven-days-change">@item.SevenDaysChange</td>
+                    <td class="item-occurances">@item.Occurances</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</body>
+
+<script>
+    function enhance7DaysChangePresentation() {
+        var changes = document.getElementsByClassName("item-seven-days-change");
+        for (var i = 0; i < changes.length; i++) {
+            if (changes[i].innerHTML == 0) {
+                changes[i].innerHTML = "no data";
+            }
+            if (changes[i].innerHTML > 0) {
+                changes[i].innerHTML = "+" + changes[i].innerHTML + "%";
+                changes[i].style.color = "#42f587";
+            }
+            if (changes[i].innerHTML < 0) {
+                changes[i].innerHTML += "%";
+                changes[i].style.color = "#f2685e";
+            }
         }
-    </tbody>
-</table>
+    }
+</script>

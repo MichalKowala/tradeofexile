@@ -1,5 +1,5 @@
 ﻿@model tradeofexile.Models.CurrenciesViewModel;
-<body onload="myFunction()">
+<body onload="hideNoDataOffers()">
     <table class="item-overview">
         <thead class="">
             <tr>
@@ -10,10 +10,10 @@
                 <th class="th-name">
                     Name
                 </th>
-                <th class="th-buy" colspan="3">
+                <th class="th-buy" colspan="5">
                     Buy
                 </th>
-                <th class="th-sell" colspan="3">
+                <th class="th-sell" colspan="5">
                     Get
                 </th>
 
@@ -31,23 +31,42 @@
                         @offer.CurrencyType.ToString()
                     </td>
 
-                    <td class="buyRate">
+
+                    @* buy *@
+                    <td class="buy-from-rate">
                         @offer.BuyRate
                     </td>
-                    <td class="buyIcon">
-                        <img src="@offer.BuyIconLink" />--->
+
+                    <td class="buy-icon">
+                        <img src="@offer.BuyIconLink" />
                     </td>
-                    <td class="buyTargetIcon">
-                        1.0 <img src="@offer.IconLink" />
+
+                    <td class="buy-leads-to">
+                        --->
                     </td>
-                    <td class="sellIcon">
+
+                    <td class="buy-to-rate">
                         1.0
+                    </td>
+
+                    <td class="buy-target-icon">
                         <img src="@offer.IconLink" />
                     </td>
-                    <td class="sellRate">
-                        ---> @offer.SellRate
+
+                    @* sell *@
+                    <td class="sell-from-rate">
+                         1.0
                     </td>
-                    <td class="sellTarget">
+                    <td class="sell-icon">
+                        <img src="@offer.IconLink" />
+                    </td>
+                    <td class="sell-leads-to">
+                        --->
+                    </td>
+                    <td class="sell-to-rate">
+                         @offer.SellRate
+                    </td>
+                    <td class="sell-target-icon">
                         <img src="@offer.SellIconLink" />
                     </td>
                 </tr>
@@ -57,28 +76,38 @@
     <div class="load-more-container">
         @Html.ActionLink("Load more", "Index", "Currencies", new { page = Model.PagingInfo.CurrentPage + 1 })
     </div>
+</body>
 
-    <script>
-        //yes, I know its not elegant
-        function myFunction() {
-            var buyRates = document.getElementsByClassName("buyRate");
-            var buyIcons = document.getElementsByClassName("buyIcon");
-            var buyTargetIcons = document.getElementsByClassName("buyTargetIcon");
-            var sellRates = document.getElementsByClassName("sellRate");
-            var sellIcons = document.getElementsByClassName("sellIcon");
-            var sellTargetIcons = document.getElementsByClassName("sellTargetIcon");
-            for (var i = 0; i < buyRates.length; i++) {
-                if (buyRates[i].innerHTML == 0) {
-                    buyRates[i].innerHTML = null;
-                    buyIcons[i].innerHTML = null;
-                    buyTargetIcons[i].innerHTML = null;
-                }
-                if (sellRates[i].innerHTML == 0) {
-                    sellRates[i].innerHTML = null;
-                    sellIcons[i].innerHTML = null;
-                    sellTargetIcons[i].innerHTML = null;
-                }
+<script>
+    //yes, I know its not elegant
+    function hideNoDataOffers() {
+        
+        var buyFromRates = document.getElementsByClassName("buy-from-rate");
+        var buyIcons = document.getElementsByClassName("buy-icon");
+        var buyLeadsTo = document.getElementsByClassName("buy-leads-to");
+        var buyToRates = document.getElementsByClassName("buy-to-rate");
+        var buyTargetIcons = document.getElementsByClassName("buy-target-icon");
+        var sellFromRates = document.getElementsByClassName("sell-from-rate");
+        var sellIcons = document.getElementsByClassName("sell-icon");
+        var sellLeadsTo = document.getElementsByClassName("sell-leads-to");
+        var sellToRates = document.getElementsByClassName("sell-to-rate");
+        var sellTargetIcons = document.getElementsByClassName("sell-target-icon");
+
+        for (var i = 0; i < buyFromRates.length; i++) {
+            if (buyFromRates[i].innerHTML == 0) {
+                buyFromRates[i].innerHTML = null;
+                buyIcons[i].innerHTML = null;
+                buyLeadsTo[i].innerHTML = "no data";
+                buyToRates[i].innerHTML = null;
+                buyTargetIcons[i].innerHTML = null;
+            }
+            if (sellToRates[i].innerHTML == 0) {
+                sellFromRates[i].innerHTML = null;
+                sellIcons[i].innerHTML = null;
+                sellLeadsTo[i].innerHTML = "no data";
+                sellToRates[i].innerHTML = null;
+                sellTargetIcons[i].innerHTML = null;
             }
         }
-    </script>
-</body>
+    }
+</script>
