@@ -4,9 +4,9 @@
     --primary-color-strong: #031424;
     --primary-color-medium: #30415D;
     --primary-color-light: #8EAE8D;
-    --color-background: #CF6766 ;
+    --color-background: #CF6766;
     --border-radius: 11px;
-    --font-primary-color:white;
+    --font-primary-color: white;
 }
 
 ::placeholder {
@@ -16,16 +16,18 @@
 body {
     background-color: var(--color-background);
     font-family: 'Raleway', sans-serif;
-    font-weight:500;
+    font-weight: 500;
     color: var(--font-primary-color);
 }
+
 a {
     color: var(--font-primary-color);
-    
 }
+
 a:hover {
     color: var(--font-primary-color);
 }
+
 .content {
     padding: 25px;
     background-color: var(--primary-color-medium);
@@ -36,7 +38,7 @@ a:hover {
     width: 100%;
 }
 
-.main-container{
+.main-container {
     margin: 0 15%;
 }
 
@@ -47,7 +49,7 @@ a:hover {
     border-radius: var(--border-radius);
     overflow: hidden;
 }
-    
+
 
 
 
@@ -57,6 +59,7 @@ a:hover {
 .left-menu {
     min-width: 255px;
 }
+
 .categories-list {
     list-style: none;
     width: 100%;
@@ -66,49 +69,54 @@ a:hover {
 }
 // -item overview table- (partial)
 
-.item-overview{
+.item-overview {
     width: 100%;
 }
 
-li{
+li {
     margin: 10px;
     height: 50px;
 }
 
-.category-link{
+.category-link {
     display: flex;
 }
 
-.category-text{
+.category-text {
     width: 100%;
     line-height: 50px;
     margin-left: 10px;
 }
 
-.category-img{
+.category-img {
     margin-left: 15px;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 60px;
+    max-width: 45px;
 }
 
-.item-occurances{
+.item-occurances {
     text-align: center;
 }
-.item-price-ammount{
+
+.item-price-ammount {
     text-align: right;
     padding-right: 10px;
 }
-.th-value{
+
+.th-value {
     text-align: left;
 }
-.item-seven-days-change{
-    text-align:center;
+
+.item-seven-days-change {
+    text-align: center;
 }
-.th-seven-days-change{
-    text-align:center;
+
+.th-seven-days-change {
+    text-align: center;
 }
-.th-occurances{
-    text-align:center;
+
+.th-occurances {
+    text-align: center;
 }
 
 .item-overview {
@@ -145,18 +153,22 @@ li{
 
 //currencies view
 
-.th-buy{
+.th-buy {
     text-align: center;
 }
+
 .th-sell {
     text-align: center;
 }
+
 .buy-from-rate {
     text-align: right;
     padding-right: 5px;
-    border-left: 1px solid var(--primary-color-light);;
+    border-left: 1px solid var(--primary-color-light);
+    ;
 }
-.buy-leads-to{
+
+.buy-leads-to {
     text-align: center;
 }
 
@@ -164,15 +176,18 @@ li{
     text-align: left;
     border-right: 1px solid var(--primary-color-light);
 }
-.sell-from-rate{
+
+.sell-from-rate {
     padding-left: 15px;
-    text-align:right;
+    text-align: right;
 }
-.sell-leads-to{
-    text-align:center;
+
+.sell-leads-to {
+    text-align: center;
 }
-.sell-to-rate{
-    text-align:right;
+
+.sell-to-rate {
+    text-align: right;
     padding-right: 5px;
 }
 //top bar
@@ -184,7 +199,7 @@ li{
     height: 45px;
 }
 
-.item-searchbox-container{
+.item-searchbox-container {
     width: 500px;
 }
 
@@ -195,15 +210,15 @@ li{
     border-radius: var(--border-radius);
     border: 0;
     opacity: 0.8;
-    color:white;
+    color: white;
     padding-left: 10px;
 }
 
-.league-selector-container{
-    display:flex;
+.league-selector-container {
+    display: flex;
 }
 
-.league-selector-description{
+.league-selector-description {
     line-height: 45px;
     padding-right: 12px;
 }
@@ -225,7 +240,7 @@ li{
 
 //other
 
-.load-more-container{
+.load-more-container {
     text-align: center;
     margin-top: 20px;
 }
