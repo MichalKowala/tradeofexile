@@ -42,7 +42,7 @@ of a given item were found so the user can have a better understanding of whethe
   <img src="https://i.imgur.com/g0E6DTJ.png"><br>
   Landing page <br><br>
   <img src="https://s6.gifyu.com/images/cycling.gif"><br>
-  Items are sorted by categories which can be navigated through via panel on the left <br><br>
+  Items are sorted by categories which can be navigated via panel on the left <br><br>
   <img src="https://s6.gifyu.com/images/league_selection.gif"><br>
   Changing currently selected league will immediately update query results accordingly <br><br>
   <img src="https://s6.gifyu.com/images/load_more.gif"><br>
@@ -70,6 +70,6 @@ I've been trying to make it work so that items the from the API are harvested si
 There are still a lot of bugs with this approach, so currently the recommended way is to either have the app 'open' for users to browse or 'closed' so it can quickly feed for items. Leftovers after unsuccessful experiments can be found within 'Jobs' folder of this layer.
   
 <h3>Presentation Layer (named just 'tradeofexile')  </h3>  
-This layer is used as a UI used by user to communicate with the app. All data requested in controllers is passed to this layer from the Application Layer as a response to MediatR 'send' methods. This layer uses .NET Core MVC template with Razor syntax. CSS files stored in this layer were generated/compiled using Sass.
+This layer is used as a UI used by user to communicate with the app. All data requested in controllers is passed to this layer from the Application Layer as a response to MediatR 'send' methods. This layer uses .NET Core MVC template with Razor syntax. CSS files stored in this layer were generated/compiled using Sass.<br><br>
 
 Each layer has its own container storing implementations of interfaces used for DI (one can look at these as kind of 'installers' for each layer). These containers are then passed to the Startup class which happens to be within the Presentation layer.
