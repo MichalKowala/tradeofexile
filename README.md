@@ -52,4 +52,24 @@ of a given item were found so the user can have a better understanding of whethe
 </div>
 
 ## Tech choices and design solutions  
-Coming soon
+The application is divided into 4 layers in a way characteristic for a clean architecture approach.
+These layers are:
+ 
+  <h3>Persistance Layer</h3>  
+This is where I've put configuration files for database entitities. These files contain rules for relationships between database tables, which are used by Entity Framework in a Code First approach. Besides that it also contains Migrations history and BaseRepository class - a generic implementation of the Repository Pattern. To find more about repository pattern visit https://codewithshadman.com/repository-pattern-csharp/. My database choice for this app was MySql.
+  
+<h3>Models Layer  </h3>  
+This is where I've decided to put some no-logic, not DTO classes - mostly entities used in the persistance layer and some classes used to help with mapping response recieved from game developer's API (mentioned in section 2) into ingame items.
+
+<h3>Application Layer  </h3>  
+This is where most of the logic happens. This is where game developer's API gets called and the response is then processed into ingame items which then are stored in a database.
+Entitites are mapped into actual DTO's (Data Transfer Objects) using AutoMapper (https://automapper.org/).  
+Query results (data) requested by users are in-memory cached using CacheProvider class to greatly improve the performance.  
+Queries and Commands are separated as recommended in the CQRS pattern, using MediatR package (https://github.com/jbogard/MediatR).  
+I've been trying to make it work so that items the from the API are harvested simultaneously while users are browsing the page using Hangfire (https://www.hangfire.io/).
+There are still a lot of bugs with this approach, so currently the recommended way is to either have the app 'open' for users to browse or 'closed' so it can quickly feed for items. Leftovers after unsuccessful experiments can be found within 'Jobs' folder of this layer.
+  
+<h3>Presentation Layer (named just 'tradeofexile')  </h3>  
+This layer is used as a UI used by user to communicate with the app. All data requested in controllers is passed to this layer from the Application Layer as a response to MediatR 'send' methods. This layer uses .NET Core MVC template with Razor syntax. CSS files stored in this layer were generated/compiled using Sass.
+
+Each layer has its own container storing implementations of interfaces used for DI (one can look at these as kind of 'installers' for each layer). These containers are then passed to the Startup class which happens to be within the Presentation layer.
