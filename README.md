@@ -63,9 +63,9 @@ This is where I've decided to put some no-logic, not DTO classes - mostly entiti
 
 <h3>Application Layer  </h3>  
 This is where most of the logic happens. This is where game developer's API gets called and the response is then processed into ingame items which then are stored in a database.
-Entitites are mapped into actual DTO's (Data Transfer Objects) using AutoMapper (https://automapper.org/).  
-Query results (data) requested by users are in-memory cached using CacheProvider class to greatly improve the performance.  
-Queries and Commands are separated as recommended in the CQRS pattern, using MediatR package (https://github.com/jbogard/MediatR).  
+Entitites are mapped into actual DTO's (Data Transfer Objects) using AutoMapper (https://automapper.org/). <br>
+Query results (data) requested by users are in-memory cached using CacheProvider class to greatly improve the performance. <br>  
+Queries and Commands are separated as recommended in the CQRS pattern, using MediatR package (https://github.com/jbogard/MediatR). <br>  
 I've been trying to make it work so that items the from the API are harvested simultaneously while users are browsing the page using Hangfire (https://www.hangfire.io/).
 There are still a lot of bugs with this approach, so currently the recommended way is to either have the app 'open' for users to browse or 'closed' so it can quickly feed for items. Leftovers after unsuccessful experiments can be found within 'Jobs' folder of this layer.
   
